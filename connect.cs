@@ -1,6 +1,7 @@
 ﻿using MelonLoader;
 using Newtonsoft.Json;
 using System;
+using System.Reflection;
 using WebSocketSharp;
 // ik this is arctics old connect.cs but its only here for the avatar patch thats
 // till i get aroud to rewriteing this whole thing to make secure 
@@ -8,6 +9,7 @@ namespace Arctic
 {
     class connect
     {
+        [Obfuscation(Exclude = true, ApplyToMembers = true, StripAfterObfuscation = true)]
         internal static WebSocket wss;
         internal static bool waitfortime = false;
         internal protected static bool ath = false;
@@ -19,8 +21,7 @@ namespace Arctic
 #else
             using (wss = new WebSocket("ws://api.glowking.net:8080"))
 #endif
-            // using (wss = new WebSocket("ws://api.glowking.net:8080"))
-            //using (wss = new WebSocket("ws://localhost:8080"))
+           
             {
                 // wss.SslConfiguration.EnabledSslProtocols = System.Security.Authentication.SslProtocols.Tls12;
                 wss.Connect();
@@ -31,7 +32,7 @@ namespace Arctic
                 };
                 wss.OnOpen += (sender, e) =>
                 {
-                   
+
                     var sendidtosv = new settings.sendsinglemsg()
                     {
                         Custommsg = "ARCTIC BETA LOGIN IGNORE",

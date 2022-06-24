@@ -15,7 +15,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCulture("")]
 
 //Melon load <3
-[assembly: MelonInfo(typeof(ArcticClientStarter), "Arctic", "4", "Glowking")]
+[assembly: MelonInfo(typeof(ArcticClient), "Arctic", "4", "Glowking")]
 [assembly: MelonGame("VRChat", "VRChat")]
 [assembly: MelonColor(System.ConsoleColor.Blue)]
 

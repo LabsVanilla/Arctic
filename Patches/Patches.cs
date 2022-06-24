@@ -1,19 +1,23 @@
-﻿using Harmony;
+﻿using Arctic.API;
+using Harmony;
 using Newtonsoft.Json;
 using System;
 using System.Linq;
 using System.Reflection;
-
+using System.Security.Cryptography;
+using System.Text;
+using UnityEngine;
 
 namespace Arctic.Patch
 {
+    [Obsolete]
     public class Patch
     {
-        private static readonly HarmonyInstance HInstance = HarmonyInstance.Create("H Patch");
+        private static readonly HarmonyInstance Mountain = HarmonyInstance.Create("Mountain Patch");
 
         public Patch(Type PatchClass, Type YourClass, string Method, string ReplaceMethod, BindingFlags stat = BindingFlags.Static, BindingFlags pub = BindingFlags.NonPublic)
         {
-            HInstance.Patch(AccessTools.Method(PatchClass, Method, null, null), GetPatch(YourClass, ReplaceMethod, stat, pub));
+            Mountain.Patch(AccessTools.Method(PatchClass, Method, null, null), GetPatch(YourClass, ReplaceMethod, stat, pub));
         }
 
         private HarmonyMethod GetPatch(Type YourClass, string MethodName, BindingFlags stat, BindingFlags pub)
@@ -30,9 +34,14 @@ namespace Arctic.Patch
         public static unsafe void Patchse()
         {
 
-            HInstance.Patch(typeof(VRCPlayer).GetMethod(nameof(VRCPlayer.Awake)), null, GetPatch(nameof(OnAvatarChanged)));
+            Mountain.Patch(typeof(VRCPlayer).GetMethod(nameof(VRCPlayer.Awake)), null, GetPatch(nameof(OnAvatarChanged)));
 
             MethodInfo[] methods = typeof(VRCPlayer).GetMethods().Where(mb => mb.Name.StartsWith("Method_Private_Void_GameObject_VRC_AvatarDescriptor_Boolean_")).ToArray();
+
+            Mountain.Patch(typeof(SystemInfo).GetProperty("deviceUniqueIdentifier").GetGetMethod(), new HarmonyMethod(AccessTools.Method(typeof(Patch), nameof(FakeHWID))));
+
+            Mountain.Patch(AccessTools.Method(typeof(NetworkManager), "Method_Public_Void_Player_1"), GetPatch(nameof(playev)));
+            Mountain.Patch(AccessTools.Method(typeof(NetworkManager), "Method_Public_Void_Player_0"), GetPatch(nameof(playevleave)));
 
         }
         private static void OnAvatarChanged(VRCPlayer __instance)
@@ -83,6 +92,62 @@ namespace Arctic.Patch
                 }
             }));
         }
+        [Obfuscation(Exclude = true)]
+        public static string newHWID = "";
+        [Obfuscation(Exclude = true)]
+        private static bool FakeHWID(ref string __result)
+        {
+            if (newHWID == string.Empty)
+            {
+                newHWID = KeyedHashAlgorithm.Create().ComputeHash(Encoding.UTF8.GetBytes(string.Format("{0}A-{1}{2}-{3}{4}-{5}{6}-3C-1F", new object[]
+                {
+                    new System.Random().Next(0, 9),
+                    new System.Random().Next(0, 9),
+                    new System.Random().Next(0, 9),
+                    new System.Random().Next(0, 9),
+                    new System.Random().Next(0, 9),
+                    new System.Random().Next(0, 9),
+                    new System.Random().Next(0, 9) }))).Select(delegate (byte x)
+                    {
+                        byte b = x;
+                        return b.ToString("x2");
+                    }).Aggregate((string x, string y) => x + y);
 
+                LogHandler.Log("Spoofer", $"Success Patched HWID {newHWID}", true);
+            }
+            __result = newHWID;
+            return false;
+        }
+
+
+        private static bool playev(VRC.Player __0)
+        {
+            try
+            {
+                string user = __0.field_Private_APIUser_0.displayName;
+                LogHandler.Log("Notification", $"{user} Joined");
+                return true;
+            }
+            catch (Exception)
+            {
+                LogHandler.Error("Player Join Patch Fail", "Player Join patch");
+                return true;
+            }
+        }
+
+        private static bool playevleave(VRC.Player __0)
+        {
+            try
+            {
+                string user = __0.field_Private_APIUser_0.displayName;
+                LogHandler.Log("Notification", $"{user} Left");
+                return true;
+            }
+            catch (Exception)
+            {
+                LogHandler.Error("Player Join Patch Fail", "Player Join patch");
+                return true;
+            }
+        }
     }
 }

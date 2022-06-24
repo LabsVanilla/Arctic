@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Arctic.settings
+﻿namespace Arctic.settings
 {
-   
-        public class sendsinglemsg
-        {
-            public string Custommsg { get; set; }
 
-            public string code { get; set; }
+    public class sendsinglemsg
+    {
+        public string Custommsg { get; set; }
 
-        }
+        public string code { get; set; }
+
+    }
 
     public class Logavi
     {
@@ -39,3 +33,5 @@ namespace Arctic.settings
 
     }
 }
+
+   

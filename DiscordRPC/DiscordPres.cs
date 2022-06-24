@@ -22,30 +22,30 @@ namespace Arctic.Main
         static extern IntPtr GetConsoleWindow();
 
         private static IntPtr window;
-       
+
         // all the requirms 
         public static string largeImage = "https://api.glowking.net/cl/AC-logo.jpg";
         public static string largeImageText = "By Glowking";
-       // public static string smallimage = "";
-      //  public static string smallImageText = "";
+        // public static string smallimage = "";
+        //  public static string smallImageText = "";
         public static string details = "Arctic Client V4";
         public static string state = "Im So Cold";
 
         public static void PresenceUpdater()
         {
 
-            
+
             Discord.DiscordManager.presence.state = state;
             DiscordRpc.UpdatePresence(ref Discord.DiscordManager.presence);
 
             Discord.DiscordManager.presence.largeImageKey = largeImage;
             DiscordRpc.UpdatePresence(ref Discord.DiscordManager.presence);
 
-           // Discord.DiscordManager.presence.smallImageKey = smallimage;
-           // DiscordRpc.UpdatePresence(ref Discord.DiscordManager.presence);
+            // Discord.DiscordManager.presence.smallImageKey = smallimage;
+            // DiscordRpc.UpdatePresence(ref Discord.DiscordManager.presence);
 
-          //  Discord.DiscordManager.presence.smallImageText = smallImageText;
-         //   DiscordRpc.UpdatePresence(ref Discord.DiscordManager.presence);
+            //  Discord.DiscordManager.presence.smallImageText = smallImageText;
+            //   DiscordRpc.UpdatePresence(ref Discord.DiscordManager.presence);
 
             Discord.DiscordManager.presence.largeImageText = largeImageText;
             DiscordRpc.UpdatePresence(ref Discord.DiscordManager.presence);

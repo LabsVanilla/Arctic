@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.Net;
+using Arctic.API;
 
 namespace Arctic.Discord
 {
@@ -10,19 +11,25 @@ namespace Arctic.Discord
         internal static DiscordRpc.RichPresence presence;
         internal static DiscordRpc.EventHandlers eventHandlers;
 
+        internal static void Init()
+        {
+            Downloader();
+            LogHandler.Log("Discord", "Starting RPC");
+            RPCINIT();
+        }
+
         internal static void Downloader()
         {
             if (!File.Exists($"{MelonUtils.GameDirectory}\\UserLibs\\discord-rpc.dll"))
             {
                 var wc = new WebClient();
                 wc.DownloadFile("https://api.glowking.net/Femboycl/discord-rpc.dll", $"{MelonUtils.GameDirectory}\\UserLibs\\discord-rpc.dll");
-                MelonLogger.Log("downloaded RPC");
+                LogHandler.Log("Downloader", "Downloaded Discord RPC");
             }
 
         }
 
-
-        internal static void Init()
+        internal static void RPCINIT()
         {
             eventHandlers = default(DiscordRpc.EventHandlers);
             eventHandlers.errorCallback = delegate (int code, string message) { };
@@ -44,7 +51,6 @@ namespace Arctic.Discord
 
             }
             catch { }
-
 
         }
 

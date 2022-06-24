@@ -480,8 +480,8 @@ namespace Arctic.API
             SetToolTip(btnToolTipText);
             if (img != null)
             {
-                //SetImage(img);
-                SetImage2();
+                SetImage(img);
+                //SetImage2();
             }
         }
 
@@ -491,14 +491,14 @@ namespace Arctic.API
             MainButton.transform.Find("Icon").GetComponent<Image>().overrideSprite = newImg;
             MainButton.transform.Find("Icon").GetComponent<Image>().color = Color.white;
             MainButton.transform.Find("Icon").GetComponent<Image>().m_Color = Color.white;
-            MelonCoroutines.Start(API.image.loadspriterest(MainButton.transform.Find("Icon").GetComponent<Image>(), "https://api.glowking.net/cl/AC-logo.jpg"));
+           // MelonCoroutines.Start(API.image.loadspriterest(MainButton.transform.Find("Icon").GetComponent<Image>(), "https://api.glowking.net/cl/AC-logo.jpg"));
         }
 
 
         public  void SetImage2()
         {
             
-            MelonCoroutines.Start(API.image.loadspriterest(MainButton.transform.Find("Icon").GetComponent<Image>(), "https://api.glowking.net/cl/AC-logo.jpg"));
+          //  MelonCoroutines.Start(API.image.loadspriterest(MainButton.transform.Find("Icon").GetComponent<Image>(), "https://api.glowking.net/cl/AC-logo.jpg"));
 
 
         }

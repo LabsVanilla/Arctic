@@ -1,26 +1,37 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
-using System;
-using System.Collections;
-using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
-using MelonLoader;
+using Arctic.API;
+
 namespace Arctic.API
 {
     internal class image
     {
-
-        public static IEnumerator loadtexture2d(Texture2D Instance, string url)
+        internal static Texture2D CreateTextureFromBase64(string data)
         {
-            UnityWebRequest www = UnityWebRequestTexture.GetTexture(url);
-            yield return www.SendWebRequest();
+            Texture2D texture = new Texture2D(2, 2);
+            Il2CppImageConversionManager.LoadImage(texture, Convert.FromBase64String(data));
 
-            Instance = DownloadHandlerTexture.GetContent(www);
+            texture.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+
+            return texture;
         }
 
+        internal static Sprite CreateSpriteFromBase64(string data)
+        {
+            Texture2D texture = CreateTextureFromBase64(data);
+
+            Rect rect = new Rect(0.0f, 0.0f, texture.width, texture.height);
+
+            Vector2 pivot = new Vector2(0.5f, 0.5f);
+            Vector4 border = Vector4.zero;
+
+            Sprite sprite = Sprite.CreateSprite_Injected(texture, ref rect, ref pivot, 100.0f, 0, SpriteMeshType.Tight, ref border, false);
+
+            return sprite;
+        }
 
         public static IEnumerator loadspriterest(Image Instance, string url)
         {
@@ -32,7 +43,7 @@ namespace Arctic.API
             yield return new WaitUntil(func);
             if (www.isHttpError || www.isNetworkError)
             {
-                MelonLogger.Log("Error4 : " + www.error);
+               LogHandler.Error($"Error4 : {www.error}", "Err www");
 
                 yield break;
             }
@@ -44,5 +55,10 @@ namespace Arctic.API
 
             if (sprite2 != null) Instance.sprite = sprite2;
         }
+
+
+
+
+
     }
 }

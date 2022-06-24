@@ -12,31 +12,37 @@ namespace Arctic
         {
 
             string fileVersion = "4";
-            Console.Title = $"Arctic V4 || v{fileVersion}";
-           
+            Console.Title = $"Arctic || v{fileVersion}";
+
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("========================================================================================================================");
             Console.WriteLine("                                                                                                                        ");
             Console.WriteLine("                                                                                                                        ");
-            Console.WriteLine("              ░█████╗░██████╗░░█████╗░████████╗██╗░█████╗░  ░█████╗░██╗░░░░░██╗███████╗███╗░░██╗████████╗");
-            Console.WriteLine("              ██╔══██╗██╔══██╗██╔══██╗╚══██╔══╝██║██╔══██╗  ██╔══██╗██║░░░░░██║██╔════╝████╗░██║╚══██╔══╝");
-            Console.WriteLine("              ███████║██████╔╝██║░░╚═╝░░░██║░░░██║██║░░╚═╝  ██║░░╚═╝██║░░░░░██║█████╗░░██╔██╗██║░░░██║░░░");
-            Console.WriteLine("              ██╔══██║██╔══██╗██║░░██╗░░░██║░░░██║██║░░██╗  ██║░░██╗██║░░░░░██║██╔══╝░░██║╚████║░░░██║░░░");
-            Console.WriteLine("              ██║░░██║██║░░██║╚█████╔╝░░░██║░░░██║╚█████╔╝  ╚█████╔╝███████╗██║███████╗██║░╚███║░░░██║░░░");
-            Console.WriteLine("              ╚═╝░ ╚═╝╚═╝░░╚═╝░╚════╝░░░░╚═╝░░░╚═╝░╚════╝░  ░╚════╝░╚══════╝╚═╝╚══════╝╚═╝░░╚══╝░░░╚═╝░░░");
+            Console.WriteLine("              ░█████╗░██████╗░░█████╗░████████╗██╗░█████╗░  ░█████╗░██╗░░░░░██╗███████╗███╗░░██╗████████╗              ");
+            Console.WriteLine("              ██╔══██╗██╔══██╗██╔══██╗╚══██╔══╝██║██╔══██╗  ██╔══██╗██║░░░░░██║██╔════╝████╗░██║╚══██╔══╝              ");
+            Console.WriteLine("              ███████║██████╔╝██║░░╚═╝░░░██║░░░██║██║░░╚═╝  ██║░░╚═╝██║░░░░░██║█████╗░░██╔██╗██║░░░██║░░░             ");
+            Console.WriteLine("              ██╔══██║██╔══██╗██║░░██╗░░░██║░░░██║██║░░██╗  ██║░░██╗██║░░░░░██║██╔══╝░░██║╚████║░░░██║░░░             ");
+            Console.WriteLine("              ██║░░██║██║░░██║╚█████╔╝░░░██║░░░██║╚█████╔╝  ╚█████╔╝███████╗██║███████╗██║░╚███║░░░██║░░░             ");
+            Console.WriteLine("              ╚═╝░ ╚═╝╚═╝░░╚═╝░╚════╝░░░░╚═╝░░░╚═╝░╚════╝░  ░╚════╝░╚══════╝╚═╝╚══════╝╚═╝░░╚══╝░░░╚═╝░░░             ");
             Console.WriteLine("                                                                                                                       ");
             Console.WriteLine("                                                                                                                       ");
             Console.WriteLine("========================================================================================================================\n");
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("WIP");
+
+            Arctic.API.LogHandler.Loader("Success","Starting Arctic Client Now", true);
+            
         }
 
 
         public static IEnumerator startanim()
         {
+#if DEBUG
+            yield return null;
+#else
+
             while (APIUser.CurrentUser == null)
                 yield return null;
-            
+
             var wc = new System.Net.WebClient();
 
             var bytesa = wc.DownloadData("https://api.glowking.net/cl/assets/onstart2");
@@ -59,7 +65,8 @@ namespace Arctic
             ssystem.name = "Animation";
             ssystem.transform.Find("Anim").gameObject.GetComponent<AudioSource>().volume = 0.2f;
             yield return null;
-
+#endif
         }
+
     }
 }
