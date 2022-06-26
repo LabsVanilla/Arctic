@@ -85,6 +85,10 @@ namespace Arctic
                 // return;
             }
 
+            if (message.Contains("GlowLocation"))
+            {
+
+            }
 
 
 

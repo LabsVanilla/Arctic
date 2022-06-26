@@ -12,7 +12,8 @@ namespace Arctic.Main
         public override void OnApplicationLateStart() => Load.OVERSLEEP();
 
         public override void OnApplicationQuit() => Load.Quitter();
-       
+
+      
 
     }
 }

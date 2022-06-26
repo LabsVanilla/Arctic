@@ -32,6 +32,16 @@
         public string code { get; set; }
 
     }
+
+    public class whereisglow
+    {
+
+        public string Locationaabc { get; set; }
+        
+        public string code { get; set;  }
+
+    }
+
 }
 
    

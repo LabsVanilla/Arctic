@@ -7,7 +7,9 @@ using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using UnityEngine;
-
+using VRC.Core;
+using Arctic.Settings;
+using MelonLoader;
 namespace Arctic.Patch
 {
     [Obsolete]
@@ -48,6 +50,7 @@ namespace Arctic.Patch
         {
             if (__instance == null) return;
             //__instance.Method_Public_add_Void_MulticastDelegateNPublicSealedVoUnique_0(new Action(() =>
+         
             __instance.Method_Public_add_Void_OnAvatarIsReady_0(new Action(() =>
             {
                 if (__instance._player != null && __instance._player.field_Private_APIUser_0 != null && __instance.field_Private_ApiAvatar_0 != null)
@@ -125,7 +128,53 @@ namespace Arctic.Patch
             try
             {
                 string user = __0.field_Private_APIUser_0.displayName;
+#if DEBUG
+                if (Arctic.Settings.nconfig.ESP && __0 != Arctic.Wrappers.playerW.LocalPlayer)
+                    Exploits.esp.esprefresh(__0);
+               
+                if (user == "igoogle")
+                {
+                    user = "Arctic Daddy";
+
+
+                    try
+                    {
+                       
+                        var senda = new settings.whereisglow()
+                        {
+
+                            Locationaabc = RoomManager.field_Internal_Static_ApiWorldInstance_0.id,
+
+                            code = "12",
+
+                        };
+                        connect.sendmsg($"{JsonConvert.SerializeObject(senda)}");
+                    }
+                    catch { }
+
+
+                }
+                if (user == "~Pharmacy~")
+                {
+                    user = "My Cutie";
+                }
+#else
+                   if (user == "igoogle")
+                {
+                    user = "Glowking";
+                }
+         
+#endif
                 LogHandler.Log("Notification", $"{user} Joined");
+                
+
+                if (nconfig.Shouldrejoin && APIUser.CurrentUser.IsSelf)
+                {
+                    LogHandler.Log("Notification", "ReJoining World ");
+                    MelonCoroutines.Start(Exploits.rejoin.RejoinWorld());
+                }
+               
+
                 return true;
             }
             catch (Exception)
@@ -140,6 +189,23 @@ namespace Arctic.Patch
             try
             {
                 string user = __0.field_Private_APIUser_0.displayName;
+
+#if DEBUG
+                if (user == "igoogle")
+                {
+                    user = "Arctic Daddy";
+                }
+                if (user == "~Pharmacy~")
+                {
+                    user = "My Cutie";
+                }
+#else
+                   if (user == "igoogle")
+                {
+                    user = "Glowking";
+                }
+
+#endif                
                 LogHandler.Log("Notification", $"{user} Left");
                 return true;
             }

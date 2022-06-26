@@ -32,14 +32,17 @@ namespace Arctic.Main
 #if DEBUG
 
 
-            if (Input.GetKeyDown(KeyCode.P) &&  Input.GetKeyDown(KeyCode.Backspace))
+            if (Input.GetKeyDown(KeyCode.P))
             {
-                if (Input.GetKeyDown(KeyCode.P) && Input.GetKeyDown(KeyCode.Backspace))
+                if (Input.GetKeyDown(KeyCode.P))
                 {
 
                     try
                     {
+                       // MelonCoroutines.Start(Exploits.rejoin.RejoinWorld());
 
+
+                        /*
                         string arguments = "";
                         foreach (string stringi in Environment.GetCommandLineArgs())
                         {
@@ -49,7 +52,7 @@ namespace Arctic.Main
                         vrc.StartInfo.FileName = $"{MelonUtils.GameDirectory}\\VRChat.exe";
                         vrc.StartInfo.Arguments = arguments;
                         vrc.Start();
-                        Process.GetCurrentProcess().Kill();
+                        Process.GetCurrentProcess().Kill();*/
                     }
                     catch
                     {
@@ -74,6 +77,10 @@ namespace Arctic.Main
                 API.LogHandler.Log("Starter", "On Late Start Was Called Loading Now");
 
                 Arctic.Main.load.PresenceUpdater();
+
+               // VRC.SDKBase.Networking.GoToRoom("wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b:instanceId=77455");
+
+
             }
             catch (Exception ex)
             {
@@ -134,8 +141,14 @@ namespace Arctic.Main
                catch
                { nconfig.saveconfig($"{MelonUtils.GameDirectory}\\Arctic\\Config\\GenConfig.json"); LogHandler.Log("ABD ","Saved cinfig"); }
    */
-         
+
+
+
+
+          
+
 #endif
+
         }
     }
 }

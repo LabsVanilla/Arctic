@@ -144,9 +144,6 @@
     <Reference Include="UnityEngine.UnityWebRequestTextureModule">
       <HintPath>..\..\Nocturnal-client-main\Arctic-client\Nocturnal Client\Nocturnal\bin\Debug\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
     </Reference>
-    <Reference Include="UniverseLib.IL2CPP">
-      <HintPath>..\..\Nocturnal-client-main\Arctic-client\Nocturnal Client\Nocturnal\bin\Debug\UniverseLib.IL2CPP.dll</HintPath>
-    </Reference>
     <Reference Include="VRC.UI.Core">
       <HintPath>..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRC.UI.Core.dll</HintPath>
     </Reference>
@@ -175,12 +172,16 @@
     <Compile Include="API\Utils\Install.cs" />
     <Compile Include="API\Utils\PlayerUtils.cs" />
     <Compile Include="API\Utils\Wait.cs" />
+    <Compile Include="API\Wrappers\Class1.cs" />
+    <Compile Include="API\Wrappers\Wrappers.cs" />
+    <Compile Include="Exploits\ESP.cs" />
     <Compile Include="Exploits\Fly.cs" />
     <Compile Include="connect.cs" />
     <Compile Include="DiscordRPC\ArcticLoader.cs" />
     <Compile Include="DiscordRPC\DiscordPres.cs" />
     <Compile Include="DiscordRPC\Main.cs" />
     <Compile Include="DiscordRPC\Manager.cs" />
+    <Compile Include="Exploits\rejoin.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Logo Shower.cs" />
     <Compile Include="Main\ArcticStarter.cs" />
@@ -192,6 +193,7 @@
     <Compile Include="Settings\Config.cs" />
     <Compile Include="Settings\Settings.cs" />
     <Compile Include="styles\Qmmod.cs" />
+    <Compile Include="THinking about these .cs" />
     <Compile Include="Websocket Sharp\AssemblyInfo.cs" />
     <Compile Include="Websocket Sharp\ByteOrder.cs" />
     <Compile Include="Websocket Sharp\CloseEventArgs.cs" />
