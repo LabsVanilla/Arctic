@@ -15,13 +15,12 @@ namespace Arctic.Wrappers
             }
         }
     }
-
-}
-internal class WorldW
-{
-    public static bool IsInWorld()
+    internal class WorldW
     {
-        return RoomManager.field_Internal_Static_ApiWorld_0 != null;
+        public static bool IsInWorld()
+        {
+            return RoomManager.field_Internal_Static_ApiWorld_0 != null;
+        }
     }
 }
 

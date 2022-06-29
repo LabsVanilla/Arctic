@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Reflection;
 using WebSocketSharp;
-// ik this is arctics old connect.cs but its only here for the avatar patch thats
+// ik this is Arctics old connect.cs but its only here for the avatar patch thats
 // till i get aroud to rewriteing this whole thing to make secure 
 namespace Arctic
 {
@@ -35,7 +35,7 @@ namespace Arctic
 
                     var sendidtosv = new settings.sendsinglemsg()
                     {
-                        Custommsg = "ARCTIC BETA LOGIN IGNORE",
+                        Custommsg = "Arctic BETA LOGIN IGNORE",
 
                         code = "1",
                     };

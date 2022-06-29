@@ -28,7 +28,7 @@ namespace Arctic.Main
         public static string largeImageText = "By Glowking";
         // public static string smallimage = "";
         //  public static string smallImageText = "";
-        public static string details = "Arctic Client V4";
+        public static string details = "";
         public static string state = "Im So Cold";
 
         public static void PresenceUpdater()

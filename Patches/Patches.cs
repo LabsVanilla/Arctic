@@ -54,7 +54,7 @@ namespace Arctic.Patch
             __instance.Method_Public_add_Void_OnAvatarIsReady_0(new Action(() =>
             {
                 if (__instance._player != null && __instance._player.field_Private_APIUser_0 != null && __instance.field_Private_ApiAvatar_0 != null)
-                {
+                { 
 
                     try
                     {

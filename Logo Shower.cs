@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Text;
 using UnityEngine;
 using VRC.Core;
 
@@ -25,7 +26,7 @@ namespace Arctic
             Console.WriteLine("              ██║░░██║██║░░██║╚█████╔╝░░░██║░░░██║╚█████╔╝  ╚█████╔╝███████╗██║███████╗██║░╚███║░░░██║░░░             ");
             Console.WriteLine("              ╚═╝░ ╚═╝╚═╝░░╚═╝░╚════╝░░░░╚═╝░░░╚═╝░╚════╝░  ░╚════╝░╚══════╝╚═╝╚══════╝╚═╝░░╚══╝░░░╚═╝░░░             ");
             Console.WriteLine("                                                                                                                       ");
-            Console.WriteLine("                                                                                                                       ");
+            Console.WriteLine("                                                                                                                       ");                                                                                                                       ");
             Console.WriteLine("========================================================================================================================\n");
             Console.ForegroundColor = ConsoleColor.White;
 

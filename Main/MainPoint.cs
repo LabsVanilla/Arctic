@@ -29,6 +29,7 @@ namespace Arctic.Main
 
         public static void NONOMETHOD()
         {
+            Arctic.Exploits.Fly.FlyB();
 #if DEBUG
 
 
@@ -64,23 +65,14 @@ namespace Arctic.Main
             }
 #endif
 
-            Arctic.Exploits.Fly.FlyB();
-
-
         }
 
         public static void OVERSLEEP()
         {
-
             try
             {
                 API.LogHandler.Log("Starter", "On Late Start Was Called Loading Now");
-
                 Arctic.Main.load.PresenceUpdater();
-
-               // VRC.SDKBase.Networking.GoToRoom("wrld_4cf554b4-430c-4f8f-b53e-1f294eed230b:instanceId=77455");
-
-
             }
             catch (Exception ex)
             {
@@ -90,9 +82,7 @@ namespace Arctic.Main
 
         public static void Quitter()
         {
-
             nconfig.saveconfig($"{MelonUtils.GameDirectory}\\Arctic\\Config\\GenConfig.json");
-
         }
 
 

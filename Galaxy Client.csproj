@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Arctic</RootNamespace>
-    <AssemblyName>Arctic V4</AssemblyName>
+    <AssemblyName>Arctic Client</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -81,6 +81,10 @@
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Nocturnal-client-main\Arctic-client\Nocturnal Client\Nocturnal\bin\Debug\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Photon-DotNet, Version=4.1.6.12, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Nocturnal-client-main\Arctic-client\Nocturnal Client\Nocturnal\bin\Debug\Photon-DotNet.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -174,10 +178,10 @@
     <Compile Include="API\Utils\Wait.cs" />
     <Compile Include="API\Wrappers\Class1.cs" />
     <Compile Include="API\Wrappers\Wrappers.cs" />
+    <Compile Include="Exploits\E7 Lagger.cs" />
     <Compile Include="Exploits\ESP.cs" />
     <Compile Include="Exploits\Fly.cs" />
     <Compile Include="connect.cs" />
-    <Compile Include="DiscordRPC\ArcticLoader.cs" />
     <Compile Include="DiscordRPC\DiscordPres.cs" />
     <Compile Include="DiscordRPC\Main.cs" />
     <Compile Include="DiscordRPC\Manager.cs" />
