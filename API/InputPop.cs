@@ -3,10 +3,10 @@ using UnhollowerRuntimeLib;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Arctic.API
+namespace Galaxy.API
 {
 
-    class inputpopout
+    internal class inputpopout
     {
         public static string run(string name, Action<string> setOutput, Action action)
         {

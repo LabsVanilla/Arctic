@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -12,14 +10,11 @@ using VRC.UI.Elements;
 using VRC.UI.Elements.Controls;
 using VRC.UI.Elements.Menus;
 
-using MelonLoader;
-
-namespace Arctic.API
+namespace Galaxy.API
 {
     public class BlazesButtonAPI
     {
-        // Replace this with whatever you want. This is to prevent your buttons from overlapping with other mods buttons
-        public const string Identifier = "Arctic";
+        public const string Identifier = "Galaxy";
 
         public static List<QMSingleButton> allQMSingleButtons = new List<QMSingleButton>();
         public static List<QMNestedButton> allQMNestedButtons = new List<QMNestedButton>();
@@ -476,7 +471,7 @@ namespace Arctic.API
             {
                 MenuTabComp.GetComponent<StyleElement>().field_Private_Selectable_0 = MenuTabComp.GetComponent<Button>();
             }));
-        
+
             SetToolTip(btnToolTipText);
             if (img != null)
             {
@@ -491,20 +486,17 @@ namespace Arctic.API
             MainButton.transform.Find("Icon").GetComponent<Image>().overrideSprite = newImg;
             MainButton.transform.Find("Icon").GetComponent<Image>().color = Color.white;
             MainButton.transform.Find("Icon").GetComponent<Image>().m_Color = Color.white;
-           // MelonCoroutines.Start(API.image.loadspriterest(MainButton.transform.Find("Icon").GetComponent<Image>(), "https://api.glowking.net/cl/AC-logo.jpg"));
+            // MelonCoroutines.Start(API.image.loadspriterest(MainButton.transform.Find("Icon").GetComponent<Image>(), "https://api.galaxyvrc.xyz/cl/AC-logo.jpg"));
         }
 
 
-        public  void SetImage2()
+        public void SetImage2()
         {
-            
-          //  MelonCoroutines.Start(API.image.loadspriterest(MainButton.transform.Find("Icon").GetComponent<Image>(), "https://api.glowking.net/cl/AC-logo.jpg"));
+
+            //  MelonCoroutines.Start(API.image.loadspriterest(MainButton.transform.Find("Icon").GetComponent<Image>(), "https://api.galaxyvrc.xyz/cl/AC-logo.jpg"));
 
 
         }
-
-
-
 
         public void SetToolTip(string newText)
         {

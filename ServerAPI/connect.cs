@@ -1,13 +1,12 @@
-﻿using MelonLoader;
+﻿using Galaxy.API;
 using Newtonsoft.Json;
 using System;
 using System.Reflection;
 using WebSocketSharp;
-// ik this is Arctics old connect.cs but its only here for the avatar patch thats
-// till i get aroud to rewriteing this whole thing to make secure 
-namespace Arctic
+ 
+namespace Galaxy
 {
-    class connect
+    internal class connect
     {
         [Obfuscation(Exclude = true, ApplyToMembers = true, StripAfterObfuscation = true)]
         internal static WebSocket wss;
@@ -16,26 +15,21 @@ namespace Arctic
         internal static string aviserchl = "";
         public static void Runsocket()
         {
-#if DEBUG
-           using (wss = new WebSocket("ws://localhost:8080"))
-#else
-            using (wss = new WebSocket("ws://api.glowking.net:8080"))
-#endif
-           
+            using (wss = new WebSocket("ws://api.galaxyvrc.xyz:8080"))
             {
                 // wss.SslConfiguration.EnabledSslProtocols = System.Security.Authentication.SslProtocols.Tls12;
+
                 wss.Connect();
                 wss.OnClose += (sender, e) =>
                 {
-
                     tryrecconect();
                 };
                 wss.OnOpen += (sender, e) =>
                 {
 
-                    var sendidtosv = new settings.sendsinglemsg()
+                    var sendidtosv = new Settings.sendsinglemsg()
                     {
-                        Custommsg = "Arctic BETA LOGIN IGNORE",
+                        Custommsg = "Galaxy BETA LOGIN IGNORE",
 
                         code = "1",
                     };
@@ -63,8 +57,9 @@ namespace Arctic
             }
             catch (Exception error)
             {
+                LogHandler.Error("Server Down Possibly", "Server");
+                LogHandler.Error($"Cloud not connect : {error}", "Server");
 
-                MelonLogger.Error("Cloud not connect : " + error);
                 wss.Connect();
                 // System.Diagnostics.Process.GetCurrentProcess().Kill();
 
@@ -78,20 +73,11 @@ namespace Arctic
             // MelonLoader.Style.Consoles.consolelogger(message);
             //Style.Consoles.consolelogger(message);
 
-
             if (message.Contains("AvatarName") && message.Contains("Authorid") && message.Contains("Asseturl"))
             {
                 //aviserchl = message;
                 // return;
             }
-
-            if (message.Contains("GlowLocation"))
-            {
-
-            }
-
-
-
 
             if (message.ToString() == "JUSTSAYHI")
             {
@@ -101,13 +87,52 @@ namespace Arctic
             }
             else if (message.ToString() == "UserNotAuth")
             {
-                Console.WriteLine("UKNOWN HWID");
-                Console.WriteLine("Here Is where i Would of Closed game but uh i havent implemnted it lol infact you dont even need a key since its a test build");
+                API.LogHandler.Error("UKNOWN HWID", "Auth");
+                API.LogHandler.Error("open a ticket To get a hwid reset", "Auth");
 
                 //System.Diagnostics.Process.GetCurrentProcess().Kill();
             }
+
+            if (message.ToString() == "Server Error 1")
+            {
+                LogHandler.Error("Unknown Issue With Server HyperV is working on it dont wory", "Server");
+            }
+
+            if (message.ToString() == "Server Error 2")
+            {
+                LogHandler.Error("Server Mantinace", "Server");
+                LogHandler.Error("please wait for server to come back online Server required Features will not work", "Server");
+            }
+            if (message.ToString() == "Close Connection")
+            {
+                LogHandler.Error("Server Mantinace", "Server");
+                LogHandler.Error("please wait for server to come back online Server required Features will not work", "Server");
+                System.Diagnostics.Process.GetCurrentProcess().Kill();
+            }
+
+            if (message.ToString() == "IsStaff")
+            {
+                LogHandler.Log("Auth", "Staff Mode Enabled");
+                Settings.Config.IsStaff = true;
+
+            }
+
+            if (message.ToString() == "ExtraBeta")
+            {
+                LogHandler.Log("Auth", "Beta Mode Enabled");
+                Settings.Config.betaEnabled = true;
+
+
+            }
+
+            if (message.ToString() == "UserAuth")
+            {
+                Settings.Config.hasAuth = true;
+            }
+
         }
 
-
     }
+
+
 }

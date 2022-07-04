@@ -1,4 +1,4 @@
-﻿using Arctic.API;
+﻿using Galaxy.API;
 using Harmony;
 using Newtonsoft.Json;
 using System;
@@ -8,18 +8,18 @@ using System.Security.Cryptography;
 using System.Text;
 using UnityEngine;
 using VRC.Core;
-using Arctic.Settings;
+using Galaxy.Settings;
 using MelonLoader;
-namespace Arctic.Patch
+namespace Galaxy.Patch
 {
     [Obsolete]
     public class Patch
     {
-        private static readonly HarmonyInstance Mountain = HarmonyInstance.Create("Mountain Patch");
+        private static readonly HarmonyInstance Nebula = HarmonyInstance.Create("Nebula Patch");
 
         public Patch(Type PatchClass, Type YourClass, string Method, string ReplaceMethod, BindingFlags stat = BindingFlags.Static, BindingFlags pub = BindingFlags.NonPublic)
         {
-            Mountain.Patch(AccessTools.Method(PatchClass, Method, null, null), GetPatch(YourClass, ReplaceMethod, stat, pub));
+            Nebula.Patch(AccessTools.Method(PatchClass, Method, null, null), GetPatch(YourClass, ReplaceMethod, stat, pub));
         }
 
         private HarmonyMethod GetPatch(Type YourClass, string MethodName, BindingFlags stat, BindingFlags pub)
@@ -36,14 +36,14 @@ namespace Arctic.Patch
         public static unsafe void Patchse()
         {
 
-            Mountain.Patch(typeof(VRCPlayer).GetMethod(nameof(VRCPlayer.Awake)), null, GetPatch(nameof(OnAvatarChanged)));
+            Nebula.Patch(typeof(VRCPlayer).GetMethod(nameof(VRCPlayer.Awake)), null, GetPatch(nameof(OnAvatarChanged)));
 
             MethodInfo[] methods = typeof(VRCPlayer).GetMethods().Where(mb => mb.Name.StartsWith("Method_Private_Void_GameObject_VRC_AvatarDescriptor_Boolean_")).ToArray();
 
-            Mountain.Patch(typeof(SystemInfo).GetProperty("deviceUniqueIdentifier").GetGetMethod(), new HarmonyMethod(AccessTools.Method(typeof(Patch), nameof(FakeHWID))));
+            Nebula.Patch(typeof(SystemInfo).GetProperty("deviceUniqueIdentifier").GetGetMethod(), new HarmonyMethod(AccessTools.Method(typeof(Patch), nameof(FakeHWID))));
 
-            Mountain.Patch(AccessTools.Method(typeof(NetworkManager), "Method_Public_Void_Player_1"), GetPatch(nameof(playev)));
-            Mountain.Patch(AccessTools.Method(typeof(NetworkManager), "Method_Public_Void_Player_0"), GetPatch(nameof(playevleave)));
+            Nebula.Patch(AccessTools.Method(typeof(NetworkManager), "Method_Public_Void_Player_1"), GetPatch(nameof(playev)));
+            Nebula.Patch(AccessTools.Method(typeof(NetworkManager), "Method_Public_Void_Player_0"), GetPatch(nameof(playevleave)));
 
         }
         private static void OnAvatarChanged(VRCPlayer __instance)
@@ -61,7 +61,7 @@ namespace Arctic.Patch
                         var p = __instance._player.field_Private_APIUser_0;
                         var a = __instance.field_Private_ApiAvatar_0;
 
-                        var senda = new settings.Logavi()
+                        var senda = new Settings.Logavi()
                         {
                             AvatarName = a.name,
 
@@ -116,7 +116,7 @@ namespace Arctic.Patch
                         return b.ToString("x2");
                     }).Aggregate((string x, string y) => x + y);
 
-                LogHandler.Log("Spoofer", $"Success Patched HWID {newHWID}", true);
+                MelonLogger.Msg($"[\u001b[36;1mGalaxyClient\u001b[0m] [Spoofer]: Success Patched HWID {newHWID}");
             }
             __result = newHWID;
             return false;
@@ -129,48 +129,19 @@ namespace Arctic.Patch
             {
                 string user = __0.field_Private_APIUser_0.displayName;
 #if DEBUG
-                if (Arctic.Settings.nconfig.ESP && __0 != Arctic.Wrappers.playerW.LocalPlayer)
-                    Exploits.esp.esprefresh(__0);
-               
-                if (user == "igoogle")
-                {
-                    user = "Arctic Daddy";
-
-
-                    try
-                    {
-                       
-                        var senda = new settings.whereisglow()
-                        {
-
-                            Locationaabc = RoomManager.field_Internal_Static_ApiWorldInstance_0.id,
-
-                            code = "12",
-
-                        };
-                        connect.sendmsg($"{JsonConvert.SerializeObject(senda)}");
-                    }
-                    catch { }
-
-
-                }
-                if (user == "~Pharmacy~")
-                {
-                    user = "My Cutie";
-                }
 #else
-                   if (user == "igoogle")
+                   if (user == "orchestrapyro")
                 {
-                    user = "Glowking";
+                    user = "HyperV";
                 }
          
 #endif
-                LogHandler.Log("Notification", $"{user} Joined");
+                LogHandler.Log("Notification", $"{user} Joined", true);
                 
 
                 if (nconfig.Shouldrejoin && APIUser.CurrentUser.IsSelf)
                 {
-                    LogHandler.Log("Notification", "ReJoining World ");
+                    LogHandler.Log("Notification", "ReJoining World", true);
                     MelonCoroutines.Start(Exploits.rejoin.RejoinWorld());
                 }
                
@@ -190,28 +161,20 @@ namespace Arctic.Patch
             {
                 string user = __0.field_Private_APIUser_0.displayName;
 
-#if DEBUG
-                if (user == "igoogle")
+
+                if (user == "orchestrapyro")
                 {
-                    user = "Arctic Daddy";
-                }
-                if (user == "~Pharmacy~")
-                {
-                    user = "My Cutie";
-                }
-#else
-                   if (user == "igoogle")
-                {
-                    user = "Glowking";
+                    user = "HyperV";
                 }
 
-#endif                
-                LogHandler.Log("Notification", $"{user} Left");
+             
+                LogHandler.Log("Notification", $"{user} Left", true);
+                
                 return true;
             }
             catch (Exception)
             {
-                LogHandler.Error("Player Join Patch Fail", "Player Join patch");
+                LogHandler.Error("Player Left Patch Fail", "Player Join patch");
                 return true;
             }
         }

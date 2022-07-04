@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Arctic
+namespace Galaxy
 {
     internal class THinking_about_these
     {

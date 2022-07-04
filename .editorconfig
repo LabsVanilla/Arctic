@@ -2,3 +2,9 @@
 
 # IDE0022: Use block body for methods
 dotnet_diagnostic.IDE0022.severity = silent
+
+# CS0169: The field 'Fly.vrcMotionState' is never used
+dotnet_diagnostic.CS0169.severity = none
+
+# CS0649: Field 'Fly.IsFly' is never assigned to, and will always have its default value false
+dotnet_diagnostic.CS0649.severity = none

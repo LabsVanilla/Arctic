@@ -1,37 +1,56 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using MelonLoader;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MelonLoader;
+using System.Net;
 
-namespace Arctic.API.Utils
+namespace Galaxy.API.Utils
 {
     internal class Install
     {
         public static void InstallBC()
         {
-            if (!Directory.Exists($"{MelonUtils.GameDirectory}\\Arctic"))
+            if (!Directory.Exists($"{MelonUtils.GameDirectory}\\Galaxy"))
             {
-                Directory.CreateDirectory($"{MelonUtils.GameDirectory}\\Arctic");
+                Directory.CreateDirectory($"{MelonUtils.GameDirectory}\\Galaxy");
+            }
+            if (!File.Exists($"{MelonUtils.GameDirectory}\\Galaxy\\Galaxy.key"))
+            {
+                File.Create($"{MelonUtils.GameDirectory}\\Galaxy\\Galaxy.key");
+                //Settings.nconfig.saveconfig($"{MelonUtils.GameDirectory}\\Galaxy\\Config\\GenConfig.json");
+                LogHandler.Log("Config", "Created KeyFile", false);
+            }
+           
+
+            if (!Directory.Exists($"{MelonUtils.GameDirectory}\\Galaxy\\Dependencies"))
+            {
+                Directory.CreateDirectory($"{MelonUtils.GameDirectory}\\Galaxy\\Dependencies");
             }
 
-            if (!Directory.Exists($"{MelonUtils.GameDirectory}\\Arctic\\Config"))
+            if (!Directory.Exists($"{MelonUtils.GameDirectory}\\Galaxy\\Config"))
             {
-                Directory.CreateDirectory($"{MelonUtils.GameDirectory}\\Arctic\\Config");
+                Directory.CreateDirectory($"{MelonUtils.GameDirectory}\\Galaxy\\Config");
             }
-            if (!File.Exists($"{MelonUtils.GameDirectory}\\Arctic\\Config\\GenConfig.json"))
+
+            if (!File.Exists($"{MelonUtils.GameDirectory}\\Galaxy\\Config\\GenConfig.json"))
             {
-                File.Create($"{MelonUtils.GameDirectory}\\Arctic\\Config\\GenConfig.json");
-               Settings.nconfig.saveconfig($"{MelonUtils.GameDirectory}\\Arctic\\Config\\GenConfig.json");
-
+                File.Create($"{MelonUtils.GameDirectory}\\Galaxy\\Config\\GenConfig.json");
+                //Settings.nconfig.saveconfig($"{MelonUtils.GameDirectory}\\Galaxy\\Config\\GenConfig.json");
+                LogHandler.Log("Config", "Created Config", false);
             }
-            Main.Load.LoadConfig();
+            else
+            {
+                Main.Load.LoadConfig();
+                LogHandler.Log("Config", "Loading Config");
+            }
 
+            if (!File.Exists($"{MelonUtils.GameDirectory}\\Galaxy\\Dependencies\\discord-rpc.dll"))
+            {
+                var wc = new WebClient();
+                wc.DownloadFile("https://api.galaxyvrc.xyz/Galaxy/Dependencies/discord-rpc.dll", $"{MelonUtils.GameDirectory}\\Galaxy\\Dependencies\\discord-rpc.dll");
+                LogHandler.Log("Downloader", "Downloaded Discord RPC", false);
+            }
+            Settings.nconfig.saveconfig($"{MelonUtils.GameDirectory}\\Galaxy\\Config\\GenConfig.json");
         }
 
-
-
     }
+
 }

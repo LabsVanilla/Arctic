@@ -5,10 +5,11 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{967995B2-DBA5-44AE-B28F-F5115429B0B0}</ProjectGuid>
+    <LangVersion>8</LangVersion>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Arctic</RootNamespace>
-    <AssemblyName>Arctic Client</AssemblyName>
+    <RootNamespace>Galaxy</RootNamespace>
+    <AssemblyName>GalaxyClient</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -148,6 +149,9 @@
     <Reference Include="UnityEngine.UnityWebRequestTextureModule">
       <HintPath>..\..\Nocturnal-client-main\Arctic-client\Nocturnal Client\Nocturnal\bin\Debug\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestWWWModule">
+      <HintPath>..\..\Nocturnal-client-main\Arctic-client\Nocturnal Client\Arctic\bin\Debug\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
+    </Reference>
     <Reference Include="VRC.UI.Core">
       <HintPath>..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRC.UI.Core.dll</HintPath>
     </Reference>
@@ -170,33 +174,38 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API\Button Api.cs" />
+    <Compile Include="Buttons\ButInfo.cs" />
+    <Compile Include="Buttons\Exploitable.cs" />
+    <Compile Include="Buttons\Settings.cs" />
+    <Compile Include="Buttons\StaffPanel.cs" />
+    <Compile Include="Buttons\Supporters.cs" />
+    <Compile Include="ServerAPI\CheckServer.cs" />
+    <Compile Include="ServerAPI\CheckAuth.cs" />
+    <Compile Include="API\HudNotify.cs" />
     <Compile Include="API\LogHandler.cs" />
     <Compile Include="API\InputPop.cs" />
     <Compile Include="API\image.cs" />
     <Compile Include="API\Utils\Install.cs" />
-    <Compile Include="API\Utils\PlayerUtils.cs" />
-    <Compile Include="API\Utils\Wait.cs" />
-    <Compile Include="API\Wrappers\Class1.cs" />
     <Compile Include="API\Wrappers\Wrappers.cs" />
-    <Compile Include="Exploits\E7 Lagger.cs" />
     <Compile Include="Exploits\ESP.cs" />
     <Compile Include="Exploits\Fly.cs" />
-    <Compile Include="connect.cs" />
+    <Compile Include="ServerAPI\connect.cs" />
     <Compile Include="DiscordRPC\DiscordPres.cs" />
     <Compile Include="DiscordRPC\Main.cs" />
     <Compile Include="DiscordRPC\Manager.cs" />
+    <Compile Include="Exploits\QuickChange.cs" />
     <Compile Include="Exploits\rejoin.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Logo Shower.cs" />
+    <Compile Include="ServerAPI\NamePlates.cs" />
+    <Compile Include="Settings\hwid.cs" />
+    <Compile Include="styles\LoadAudio.cs" />
+    <Compile Include="styles\Logo Shower.cs" />
     <Compile Include="Main\ArcticStarter.cs" />
-    <Compile Include="Main\Class1.cs" />
     <Compile Include="Main\MainPoint.cs" />
     <Compile Include="Buttons\ButtonLoader.cs" />
     <Compile Include="Patches\Patches.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\Config.cs" />
-    <Compile Include="Settings\Settings.cs" />
-    <Compile Include="styles\Qmmod.cs" />
     <Compile Include="THinking about these .cs" />
     <Compile Include="Websocket Sharp\AssemblyInfo.cs" />
     <Compile Include="Websocket Sharp\ByteOrder.cs" />

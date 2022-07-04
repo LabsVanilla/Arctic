@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 
 
 
-namespace Arctic.Main
+namespace Galaxy.Main
 {
-    public static class load
+    internal static class load
     {
         [DllImport("user32.dll", EntryPoint = "SetWindowText")]
         public static extern bool SetWindowText(System.IntPtr hwnd, System.String lpString);
@@ -24,12 +24,19 @@ namespace Arctic.Main
         private static IntPtr window;
 
         // all the requirms 
-        public static string largeImage = "https://api.glowking.net/cl/AC-logo.jpg";
-        public static string largeImageText = "By Glowking";
+        public static string largeImage = "https://api.galaxyvrc.xyz/Galaxy/DCRPC.jpg";
+        public static string largeImageText = "By HyperV";
         // public static string smallimage = "";
         //  public static string smallImageText = "";
-        public static string details = "";
-        public static string state = "Im So Cold";
+
+#if DEBUG
+        public static string details = "Either Working on Galaxy or Crashing";
+#else
+        public static string details = "HOLD ON TO ME";
+#endif
+
+
+        public static string state = ".gg/HyperV";
 
         public static void PresenceUpdater()
         {
@@ -53,13 +60,13 @@ namespace Arctic.Main
             Discord.DiscordManager.presence.details = details;
             DiscordRpc.UpdatePresence(ref Discord.DiscordManager.presence);
 
-            Console.Title = $"Arctic V4 Preview";
+            Console.Title = $"Galaxy V4 Preview";
             window = FindWindow(null, "VRChat");
-            SetWindowText(window, "Arctic V4 Preview");
+            SetWindowText(window, "Galaxy V4 Preview");
             Process[] processes = Process.GetProcessesByName("Discord");
 
 
-            var bytess = new WebClient().DownloadData("http://api.glowking.net/favicon.ico");
+            var bytess = new WebClient().DownloadData("http://api.galaxyvrc.xyz/favicon.ico");
             Stream stream = new MemoryStream(bytess);
 
             // SendMessage(window, WM_SETICON, ICON_BIG);

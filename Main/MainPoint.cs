@@ -1,35 +1,41 @@
-﻿using MelonLoader;
+﻿using Galaxy.API;
+using Galaxy.Settings;
+using MelonLoader;
 using System;
-using System.Diagnostics;
+using System.IO;
 using System.Reflection;
 using System.Threading;
 using UnityEngine;
-using Arctic.API;
-using Arctic.Settings;
-using System.IO;
 
 
-namespace Arctic.Main
+namespace Galaxy.Main
 {
-    public class Load
+    internal class Load
     {
         [Obfuscation(Exclude = true, ApplyToMembers = true, StripAfterObfuscation = true)]
         private static Thread tr = new Thread(connect.Runsocket);
         [Obsolete]
         public static void OnStar()
         {
+            if (Environment.CommandLine.Contains("--BETAMODE"))
+            {
+                Settings.Config.ExtraBeta = "1";
+            }
+            
+            MelonCoroutines.Start(HudNotify.StartHudNotify());
             LogoShower.DisplayLogo();
             API.Utils.Install.InstallBC();
             Discord.DiscordManager.Init();
             MelonCoroutines.Start(Buttons.Buttonlayout.WaitForSM());
-            MelonCoroutines.Start(LogoShower.startanim());
+            MelonCoroutines.Start(CheckAuth.CheckAuthMeth());
             tr.Start();
             Patch.Patch.Patchse();
+            
         }
 
         public static void NONOMETHOD()
         {
-            Arctic.Exploits.Fly.FlyB();
+            
 #if DEBUG
 
 
@@ -40,8 +46,10 @@ namespace Arctic.Main
 
                     try
                     {
-                       // MelonCoroutines.Start(Exploits.rejoin.RejoinWorld());
 
+                        Console.WriteLine(Settings.Config.betaEnabled);
+                        Console.WriteLine(Settings.Config.IsStaff);
+                        LogHandler.Log("Test", "Test Notify", true);
 
                         /*
                         string arguments = "";
@@ -65,14 +73,25 @@ namespace Arctic.Main
             }
 #endif
 
+            if (Input.GetKeyDown(KeyCode.F1) & nconfig.EnableKeybinds)
+            { Exploits.QuickChange.QuickChangeAvi(); }
+            if (Input.GetKeyDown(KeyCode.F2) & nconfig.EnableKeybinds)
+            { Exploits.QuickChange.QuickChangeAvi2(); }
+            if (Input.GetKeyDown(KeyCode.F3) & nconfig.EnableKeybinds)
+            { Exploits.QuickChange.QuickChangeAvi3(); }
+            if (Input.GetKeyDown(KeyCode.F4) & nconfig.EnableKeybinds)
+            { Exploits.QuickChange.QuickChangeAvi4(); }
+            Exploits.Fly.FlyB();
         }
-
         public static void OVERSLEEP()
         {
             try
             {
-                API.LogHandler.Log("Starter", "On Late Start Was Called Loading Now");
-                Arctic.Main.load.PresenceUpdater();
+                LogHandler.Log("Starter", "On Late Start Was Called Loading Now");
+                
+                load.PresenceUpdater();
+                MelonCoroutines.Start(styles.LoadAudio.Starter());
+                nconfig.saveconfig($"{MelonUtils.GameDirectory}\\Galaxy\\Config\\GenConfig.json");
             }
             catch (Exception ex)
             {
@@ -82,7 +101,7 @@ namespace Arctic.Main
 
         public static void Quitter()
         {
-            nconfig.saveconfig($"{MelonUtils.GameDirectory}\\Arctic\\Config\\GenConfig.json");
+            nconfig.saveconfig($"{MelonUtils.GameDirectory}\\Galaxy\\Config\\GenConfig.json");
         }
 
 
@@ -90,11 +109,12 @@ namespace Arctic.Main
         {
             try
             {
-                var mainl = Newtonsoft.Json.JsonConvert.DeserializeObject<configa>(File.ReadAllText($"{MelonUtils.GameDirectory}\\Arctic\\Config\\GenConfig.json"));
-                nconfig.applyconfig($"{MelonUtils.GameDirectory}\\Arctic\\Config\\GenConfig.json", mainl); }
+                var mainl = Newtonsoft.Json.JsonConvert.DeserializeObject<configa>(File.ReadAllText($"{MelonUtils.GameDirectory}\\Galaxy\\Config\\GenConfig.json"));
+                nconfig.applyconfig($"{MelonUtils.GameDirectory}\\Galaxy\\Config\\GenConfig.json", mainl);
+            }
             catch
-            { nconfig.saveconfig($"{MelonUtils.GameDirectory}\\Arctic\\Config\\GenConfig.json"); LogHandler.Log("ABD ", "Saved Config"); }
-            //var mainl = Newtonsoft.Json.JsonConvert.DeserializeObject<configa>(File.ReadAllText($"{MelonUtils.GameDirectory}\\Arctic\\Config\\GenConfig.json"));
+            { nconfig.saveconfig($"{MelonUtils.GameDirectory}\\Galaxy\\Config\\GenConfig.json"); LogHandler.Log("ABD ", "Saved Config"); }
+            //var mainl = Newtonsoft.Json.JsonConvert.DeserializeObject<configa>(File.ReadAllText($"{MelonUtils.GameDirectory}\\Galaxy\\Config\\GenConfig.json"));
 #if DEBUG
             /*   foreach (var bbc in mainl.GetType().GetProperties())
                {
@@ -127,15 +147,15 @@ namespace Arctic.Main
                }
    /*
                try
-               { nconfig.applyconfig($"{MelonUtils.GameDirectory}\\Arctic\\Config\\GenConfig.json", mainl); }
+               { nconfig.applyconfig($"{MelonUtils.GameDirectory}\\Galaxy\\Config\\GenConfig.json", mainl); }
                catch
-               { nconfig.saveconfig($"{MelonUtils.GameDirectory}\\Arctic\\Config\\GenConfig.json"); LogHandler.Log("ABD ","Saved cinfig"); }
+               { nconfig.saveconfig($"{MelonUtils.GameDirectory}\\Galaxy\\Config\\GenConfig.json"); LogHandler.Log("ABD ","Saved cinfig"); }
    */
 
 
 
 
-          
+
 
 #endif
 

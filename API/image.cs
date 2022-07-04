@@ -3,9 +3,9 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
-using Arctic.API;
+using Galaxy.API;
 
-namespace Arctic.API
+namespace Galaxy.API
 {
     internal class image
     {
@@ -35,7 +35,6 @@ namespace Arctic.API
 
         public static IEnumerator loadspriterest(Image Instance, string url)
         {
-
             var www = UnityWebRequestTexture.GetTexture(url);
             _ = www.downloadHandler;
             var asyncOperation = www.SendWebRequest();
@@ -44,21 +43,13 @@ namespace Arctic.API
             if (www.isHttpError || www.isNetworkError)
             {
                LogHandler.Error($"Error4 : {www.error}", "Err www");
-
-                yield break;
+               yield break;
             }
-
             var content = DownloadHandlerTexture.GetContent(www);
             var sprite2 = Instance.sprite = Sprite.CreateSprite(content,
                 new Rect(0f, 0f, content.width, content.height), new Vector2(0f, 0f), 100000f, 1000u,
                 SpriteMeshType.FullRect, Vector4.zero, false);
-
             if (sprite2 != null) Instance.sprite = sprite2;
         }
-
-
-
-
-
     }
 }

@@ -1,11 +1,13 @@
 ﻿using MelonLoader;
 
-namespace Arctic.Main
+namespace Galaxy.Main
 {
-    public class ArcticClient : MelonMod
+    public class GalaxyClient : MelonMod
     {
         
+#pragma warning disable CS0612 // Type or member is obsolete
         public override void OnApplicationStart() => Load.OnStar();
+#pragma warning restore CS0612 // Type or member is obsolete
 
         public override void OnUpdate() => Load.NONOMETHOD();
 

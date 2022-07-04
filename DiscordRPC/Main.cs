@@ -1,10 +1,7 @@
-﻿using MelonLoader;
+﻿using Galaxy.API;
 using System;
-using System.IO;
-using System.Net;
-using Arctic.API;
 
-namespace Arctic.Discord
+namespace Galaxy.Discord
 {
     internal static class DiscordManager
     {
@@ -13,32 +10,24 @@ namespace Arctic.Discord
 
         internal static void Init()
         {
-            Downloader();
+            //Downloader();
             LogHandler.Log("Discord", "Starting RPC");
             RPCINIT();
         }
 
-        internal static void Downloader()
-        {
-            if (!File.Exists($"{MelonUtils.GameDirectory}\\UserLibs\\discord-rpc.dll"))
-            {
-                var wc = new WebClient();
-                wc.DownloadFile("https://api.glowking.net/Femboycl/discord-rpc.dll", $"{MelonUtils.GameDirectory}\\UserLibs\\discord-rpc.dll");
-                LogHandler.Log("Downloader", "Downloaded Discord RPC");
-            }
 
-        }
 
         internal static void RPCINIT()
         {
             eventHandlers = default(DiscordRpc.EventHandlers);
             eventHandlers.errorCallback = delegate (int code, string message) { };
-            presence.state = $".gg/arcticvrc";
-            presence.details = "I hate the way you look at me";
+            presence.state = $".gg/HyperV";
+
+            presence.details = "all these stars and i still only want you";
             presence.largeImageKey = "null";
-            presence.largeImageText = "By Glowking";
+            presence.largeImageText = "By HyperV";
             presence.smallImageKey = "<3";
-            presence.smallImageText = "discord.gg/arcticvrc";
+            presence.smallImageText = ".gg/HyperV";
             presence.partySize = 0;
             presence.partyMax = 0;
             presence.startTimestamp = (long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;

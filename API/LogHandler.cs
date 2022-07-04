@@ -1,70 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MelonLoader;
 
-namespace Arctic.API
+namespace Galaxy.API
 {
     internal class LogHandler
     {
-        internal static void Log(string Identify, string message, bool value = false)
+        internal static void Log(string Identify, string message, bool ShouldDisplay = false)
         {
-            //if (!value) return;
-            var today = System.DateTime.Now;
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.Write($"[{today.ToString("HH:mm:ss")}]");
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.Write($" ");
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.Write($"[Arctic Client] ");
-            Console.ForegroundColor = ConsoleColor.Gray;
-            Console.Write($"[{Identify}] ");
-            if (value == true)
-            { Console.ForegroundColor = ConsoleColor.Green; }
-            Console.Write(message);
-            Console.WriteLine();
-            
+
+            if (Settings.Config.hasAuth == true)
+            {
+
+
+                MelonLogger.Msg($"[\u001b[36;1mGalaxyClient\u001b[0m] [{Identify}]: {message}");
+
+                if (ShouldDisplay == true)
+                {
+                    HudNotify.Msg($"  {message}  ", 2.5f);
+                }
+            }
         }
 
-        internal static void Error(string message, string Identify, bool value = true)
+        internal static void Error(string message, string Identify)
         {
-            if (!value) return;
-            var today = System.DateTime.Now;
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.Write($"[{today.ToString("HH:mm:ss")}]");
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.Write($" ");
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.Write($"[Arctic Client] ");
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write($"[{Identify}]: ");
-            
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write(message);
-            Console.WriteLine();
 
+            MelonLogger.Error($"[\u001b[36mGalaxyClient\u001b[31m] [{Identify}]: Send a screen shot of below Error");
+            MelonLogger.Error($"[\u001b[36mGalaxyClient\u001b[31m] [{Identify}]: {message}");
+            HudNotify.Error("Check Console as an error occoured", 2.5f);
         }
 
-        internal static void Loader(string Identify, string message, bool value = false)
+        internal static void Loader(string Identify, string message)
         {
-            //if (!value) return;
-            var today = System.DateTime.Now;
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.Write($"[{today.ToString("HH:mm:ss")}]");
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.Write($" ");
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.Write($"[Arctic Loader] ");
-            Console.ForegroundColor = ConsoleColor.Gray;
-            Console.Write($"[{Identify}] ");
-            if (value == true)
-            { Console.ForegroundColor = ConsoleColor.Green; }
-            Console.Write(message);
-            Console.WriteLine();
+            MelonLogger.Msg($"[\u001b[36;1mGalaxyLoader\u001b[0m] [{Identify}]: {message}");
 
         }
-
-
     }
 }
