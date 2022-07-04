@@ -19,6 +19,12 @@ namespace Galaxy.Settings
         public static string sendauth;
 
         public static bool hasAuth = false;
+
+        public static string GlobalMessage = "";
+
+        public static bool ServerNotify = false;
+
+
     }
 
     [Serializable]
@@ -38,6 +44,7 @@ namespace Galaxy.Settings
         public string QuickAvi4 { get; set; }
         public string LoadMusic { get; set; }
         public bool ShouldPlayLoadMusic { get; set; }
+        public bool AutoSkybox { get; set; }
 
     }
 
@@ -59,6 +66,7 @@ namespace Galaxy.Settings
                 QuickAvi4 = QuickAvi4,
                 LoadMusic = LoadMusic,
                 ShouldPlayLoadMusic = ShouldPlayLoadMusic,
+                AutoSkybox = AutoSkybox,
             };
             try
             {
@@ -87,6 +95,7 @@ namespace Galaxy.Settings
             QuickAvi4 = (string)sta.QuickAvi4;
             ShouldPlayLoadMusic = (bool)sta.ShouldPlayLoadMusic;
             LoadMusic = (string)sta.LoadMusic;
+            AutoSkybox = (bool)sta.AutoSkybox;
 
 
             saveconfig(path);
@@ -103,16 +112,17 @@ namespace Galaxy.Settings
         public static string QuickAvi2 = "";
         public static string QuickAvi3 = "";
         public static string QuickAvi4 = "";
-        public static string LoadMusic = "https://api.glowking.net/Galaxy/assets/LoadingMusic.mp3";
+        public static string LoadMusic = "https://api.galaxyvrc.xyz/Galaxy/assets/LoadingMusic.mp3";
         public static bool ShouldPlayLoadMusic = true;
+        public static bool AutoSkybox = false;
     }
-    
+
     internal class confirmauth
     {
         public string key { get; set; }
 
         public string Hwida { get; set; }
-        
+
         public string code { get; set; }
 
         public string ExtraBeta { get; set; }
@@ -149,4 +159,6 @@ namespace Galaxy.Settings
         public string code { get; set; }
     }
 }
+
+  
 

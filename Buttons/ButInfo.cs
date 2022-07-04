@@ -10,7 +10,7 @@ namespace Galaxy.Buttons
         {
             var Info = new QMNestedButton(tabMenu, 2, 3, "Galaxy Info", "GalaxyInfo", "Galaxy Client");
 
-            var Discord = new QMSingleButton(tabMenu, 1, 0, "Munchen Client", delegate
+            var Discord = new QMSingleButton(tabMenu, 1, 0, "Join The Discord", delegate
              {
                  Process.Start("https://galaxyvrc.xyz/discord");
              }, "Join The Discord");

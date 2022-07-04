@@ -107,7 +107,8 @@ namespace Galaxy
             {
                 LogHandler.Error("Server Mantinace", "Server");
                 LogHandler.Error("please wait for server to come back online Server required Features will not work", "Server");
-                System.Diagnostics.Process.GetCurrentProcess().Kill();
+              
+                // System.Diagnostics.Process.GetCurrentProcess().Kill();
             }
 
             if (message.ToString() == "IsStaff")
@@ -128,6 +129,24 @@ namespace Galaxy
             if (message.ToString() == "UserAuth")
             {
                 Settings.Config.hasAuth = true;
+            }
+
+            if (message.Contains("Global"))
+            {
+                try
+                {
+                    if (Settings.Config.GlobalMessage != message)
+                    {
+                        // LogHandler.Log("Server Notifcations", $"{message}", true);
+                        // HudNotify.Msg($"  {message}  ", 4.5f);
+                        Console.WriteLine(message);
+                        Settings.Config.ServerNotify = true;
+                        // Console.Beep();
+                        Settings.Config.GlobalMessage = message;
+                    }
+                }
+                catch
+                { }
             }
 
         }

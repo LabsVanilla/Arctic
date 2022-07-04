@@ -198,7 +198,7 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ServerAPI\NamePlates.cs" />
     <Compile Include="Settings\hwid.cs" />
-    <Compile Include="styles\LoadAudio.cs" />
+    <Compile Include="styles\LoadModifyer.cs" />
     <Compile Include="styles\Logo Shower.cs" />
     <Compile Include="Main\ArcticStarter.cs" />
     <Compile Include="Main\MainPoint.cs" />

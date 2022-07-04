@@ -48,6 +48,12 @@ namespace Galaxy.API.Utils
                 wc.DownloadFile("https://api.galaxyvrc.xyz/Galaxy/Dependencies/discord-rpc.dll", $"{MelonUtils.GameDirectory}\\Galaxy\\Dependencies\\discord-rpc.dll");
                 LogHandler.Log("Downloader", "Downloaded Discord RPC", false);
             }
+            if (!File.Exists($"{MelonUtils.GameDirectory}\\Galaxy\\Dependencies\\clientassetbundle"))
+            {
+                var wc = new WebClient();
+                wc.DownloadFile("https://api.galaxyvrc.xyz/Galaxy/Dependencies/clientassetbundle", $"{MelonUtils.GameDirectory}\\Galaxy\\Dependencies\\clientassetbundle");
+                LogHandler.Log("Downloader", "Downloaded Discord RPC", false);
+            }
             Settings.nconfig.saveconfig($"{MelonUtils.GameDirectory}\\Galaxy\\Config\\GenConfig.json");
         }
 

@@ -10,7 +10,7 @@ namespace Galaxy.Buttons
         public static IEnumerator WaitForSM()
         {
             while (GameObject.Find($"UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup") == null) yield return null;
-
+            API.CheckServer.SetTimer();
             if (Settings.Config.hasAuth == true)
             {
                 LoadButtons();

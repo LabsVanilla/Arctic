@@ -128,14 +128,15 @@ namespace Galaxy.Patch
             try
             {
                 string user = __0.field_Private_APIUser_0.displayName;
-#if DEBUG
-#else
-                   if (user == "orchestrapyro")
+
+                if (nconfig.AutoSkybox == true && APIUser.CurrentUser.displayName == user)
+                { styles.LoadMods.LoadSkyWhenever(); }
+
+                if (user == "orchestrapyro")
                 {
                     user = "HyperV";
                 }
          
-#endif
                 LogHandler.Log("Notification", $"{user} Joined", true);
                 
 
@@ -144,7 +145,6 @@ namespace Galaxy.Patch
                     LogHandler.Log("Notification", "ReJoining World", true);
                     MelonCoroutines.Start(Exploits.rejoin.RejoinWorld());
                 }
-               
 
                 return true;
             }
@@ -160,14 +160,15 @@ namespace Galaxy.Patch
             try
             {
                 string user = __0.field_Private_APIUser_0.displayName;
-
+                if (APIUser.CurrentUser.displayName == user)
+                { styles.LoadMods.LoadSkyWhenever(); }
 
                 if (user == "orchestrapyro")
                 {
                     user = "HyperV";
                 }
 
-             
+               
                 LogHandler.Log("Notification", $"{user} Left", true);
                 
                 return true;

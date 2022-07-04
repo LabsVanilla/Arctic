@@ -15,7 +15,7 @@ namespace Galaxy.API
 
                 if (ShouldDisplay == true)
                 {
-                    HudNotify.Msg($"  {message}  ", 2.5f);
+                    HudNotify.Msg(message, 4f);
                 }
             }
         }
@@ -25,7 +25,7 @@ namespace Galaxy.API
 
             MelonLogger.Error($"[\u001b[36mGalaxyClient\u001b[31m] [{Identify}]: Send a screen shot of below Error");
             MelonLogger.Error($"[\u001b[36mGalaxyClient\u001b[31m] [{Identify}]: {message}");
-            HudNotify.Error("Check Console as an error occoured", 2.5f);
+
         }
 
         internal static void Loader(string Identify, string message)

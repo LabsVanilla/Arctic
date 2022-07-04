@@ -60,9 +60,9 @@ namespace Galaxy.Main
             Discord.DiscordManager.presence.details = details;
             DiscordRpc.UpdatePresence(ref Discord.DiscordManager.presence);
 
-            Console.Title = $"Galaxy V4 Preview";
+            Console.Title = $"Galaxy Client by HyperV";
             window = FindWindow(null, "VRChat");
-            SetWindowText(window, "Galaxy V4 Preview");
+            SetWindowText(window, "Galaxy Client By HyperV");
             Process[] processes = Process.GetProcessesByName("Discord");
 
 

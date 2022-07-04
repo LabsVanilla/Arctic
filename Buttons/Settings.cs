@@ -62,7 +62,7 @@ namespace Galaxy.Buttons
                 try { string AvatarID = "AVATAR ID"; API.inputpopout.run(" Avatar", value => AvatarID = value, () => { nconfig.PCCrash = AvatarID; nconfig.saveconfig($"{MelonUtils.GameDirectory}\\Galaxy\\Config\\GenConfig.json"); }); } catch (Exception e) { Console.WriteLine(e); }
             }, "Set Pc Crasher");
 
-            
+
 
             var TogglQuickKybinds = new QMToggleButton(settingsmenu, 4, 1, "KeyBinds", delegate
             {
@@ -80,22 +80,41 @@ namespace Galaxy.Buttons
 
             var LoadMusicToggle = new QMToggleButton(settingsmenu, 1, 1, "LoadMusic", delegate
             {
-                
+
                 nconfig.ShouldPlayLoadMusic = true;
+                MelonCoroutines.Start(styles.LoadMods.Starter());
                 nconfig.saveconfig($"{MelonUtils.GameDirectory}\\Galaxy\\Config\\GenConfig.json");
             }, delegate
             {
                 nconfig.ShouldPlayLoadMusic = false;
-                MelonCoroutines.Stop(styles.LoadAudio.Starter());
+
                 nconfig.saveconfig($"{MelonUtils.GameDirectory}\\Galaxy\\Config\\GenConfig.json");
-                
+
 
             }, "Toggle Load Music");
+
+            var AutoStarSky = new QMToggleButton(settingsmenu, 1, 2, "Star Sky", delegate
+            {
+                nconfig.AutoSkybox = true;
+                nconfig.saveconfig($"{MelonUtils.GameDirectory}\\Galaxy\\Config\\GenConfig.json");
+                styles.LoadMods.LoadSkyWhenever();
+            }, delegate
+            {
+                nconfig.AutoSkybox = false;
+                nconfig.saveconfig($"{MelonUtils.GameDirectory}\\Galaxy\\Config\\GenConfig.json");
+            }, "Toggle AutoSkybox");
+
+            styles.LoadMods.LoadSkyWhenever();
 
 
             if (nconfig.ShouldPlayLoadMusic == true)
             {
                 LoadMusicToggle.ClickMe();
+            }
+
+            if (nconfig.AutoSkybox == true)
+            {
+                AutoStarSky.ClickMe();
             }
 
             if (nconfig.EnableKeybinds == true)
