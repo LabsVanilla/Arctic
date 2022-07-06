@@ -12,9 +12,7 @@ namespace Galaxy.Buttons
             while (GameObject.Find($"UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup") == null) yield return null;
             API.CheckServer.SetTimer();
             if (Settings.Config.hasAuth == true)
-            {
-                LoadButtons();
-            }
+            {LoadButtons();}
         }
         public static void LoadButtons()
         {
@@ -23,7 +21,6 @@ namespace Galaxy.Buttons
             GameObject.Find("/UserInterface").transform.Find("Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Carousel_Banners/Image_MASK/Image/Banners/").gameObject.SetActive(false);
             var tabMenu = new QMTabMenu("Galaxy Menu", "Galaxy Client", ARCICON);
 
-
             // starts all the buttons
             ButInfo.Info(tabMenu);
             Exploitable.ButtonExploits(tabMenu);
@@ -31,9 +28,7 @@ namespace Galaxy.Buttons
 
             //bool to check if we should load the staff menu
             if (Settings.Config.IsStaff)
-            {
-                Staff.Panel(tabMenu);
-            }
+            {Staff.Panel(tabMenu);}
 
             //just an alert that the buttons should of loaded properly
             LogHandler.Log("Buttons", "Buttons Loaded");

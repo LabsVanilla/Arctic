@@ -7,31 +7,20 @@ namespace Galaxy.Settings
     internal class Config
     {
         public static bool ShouldFly = false;
-
         public static string GlowLocation = "";
-
         public static bool IsStaff = false;
-
         public static bool betaEnabled = false;
-
         public static string ExtraBeta = "0";
-
         public static string sendauth;
-
         public static bool hasAuth = false;
-
         public static string GlobalMessage = "";
-
         public static bool ServerNotify = false;
-
-
     }
 
     [Serializable]
 
     internal class configa
     {
-
         public string QuestCrash { get; set; }
         public string PCCrash { get; set; }
         public bool ESP { get; set; }
@@ -45,7 +34,6 @@ namespace Galaxy.Settings
         public string LoadMusic { get; set; }
         public bool ShouldPlayLoadMusic { get; set; }
         public bool AutoSkybox { get; set; }
-
     }
 
     internal class nconfig
@@ -69,15 +57,9 @@ namespace Galaxy.Settings
                 AutoSkybox = AutoSkybox,
             };
             try
-            {
-                File.WriteAllText(path, $"{Newtonsoft.Json.JsonConvert.SerializeObject(sv)}");
-            }
+            { File.WriteAllText(path, $"{Newtonsoft.Json.JsonConvert.SerializeObject(sv)}"); }
             catch
-            {
-                API.LogHandler.Error("Failed to save config if you just started VRCHAT dont worry if not please alert Glow", "Config Saver");
-            }
-
-
+            { API.LogHandler.Error("Failed to save config if you just started VRCHAT dont worry if not please alert Glow", "Config Saver"); }
         }
 
 
@@ -96,10 +78,8 @@ namespace Galaxy.Settings
             ShouldPlayLoadMusic = (bool)sta.ShouldPlayLoadMusic;
             LoadMusic = (string)sta.LoadMusic;
             AutoSkybox = (bool)sta.AutoSkybox;
-
-
+            
             saveconfig(path);
-
         }
 
         public static string QuestCrash = "avtr_0c8a5fad-fab9-4940-8c50-dc638b52f41b";
@@ -120,42 +100,28 @@ namespace Galaxy.Settings
     internal class confirmauth
     {
         public string key { get; set; }
-
         public string Hwida { get; set; }
-
         public string code { get; set; }
-
         public string ExtraBeta { get; set; }
     }
 
     internal class sendsinglemsg
     {
         public string Custommsg { get; set; }
-
         public string code { get; set; }
-
     }
 
     internal class Logavi
     {
         public string AvatarName { get; set; }
-
         public string Author { get; set; }
-
         public string Authorid { get; set; }
-
         public string Avatarid { get; set; }
-
         public string Description { get; set; }
-
         public string Asseturl { get; set; }
-
         public string Image { get; set; }
-
         public string Platform { get; set; }
-
         public string Status { get; set; }
-
         public string code { get; set; }
     }
 }

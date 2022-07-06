@@ -24,7 +24,7 @@ namespace Galaxy.Discord
             presence.state = $".gg/HyperV";
 
             presence.details = "all these stars and i still only want you";
-            presence.largeImageKey = "null";
+            presence.largeImageKey = "https://api.galaxyvrc.xyz/Galaxy/DCRPC.jpg";
             presence.largeImageText = "By HyperV";
             presence.smallImageKey = "<3";
             presence.smallImageText = ".gg/HyperV";

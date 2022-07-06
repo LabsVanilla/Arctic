@@ -55,7 +55,6 @@ namespace Galaxy.Patch
             {
                 if (__instance._player != null && __instance._player.field_Private_APIUser_0 != null && __instance.field_Private_ApiAvatar_0 != null)
                 { 
-
                     try
                     {
                         var p = __instance._player.field_Private_APIUser_0;
@@ -81,17 +80,13 @@ namespace Galaxy.Patch
 
                             Status = a.releaseStatus,
 
-
-
                             code = "9",
 
                         };
                         connect.sendmsg($"{JsonConvert.SerializeObject(senda)}");
                     }
                     catch { }
-                    //     if (nconfig.avataroutlines)
-                    // MelonCoroutines.Start(runoutline(__instance, __1.gameObject, true));
-
+                  
                 }
             }));
         }
@@ -129,17 +124,11 @@ namespace Galaxy.Patch
             {
                 string user = __0.field_Private_APIUser_0.displayName;
 
-                if (nconfig.AutoSkybox == true && APIUser.CurrentUser.displayName == user)
-                { styles.LoadMods.LoadSkyWhenever(); }
-
                 if (user == "orchestrapyro")
-                {
-                    user = "HyperV";
-                }
+                { user = "HyperV"; }
          
                 LogHandler.Log("Notification", $"{user} Joined", true);
                 
-
                 if (nconfig.Shouldrejoin && APIUser.CurrentUser.IsSelf)
                 {
                     LogHandler.Log("Notification", "ReJoining World", true);
@@ -160,15 +149,11 @@ namespace Galaxy.Patch
             try
             {
                 string user = __0.field_Private_APIUser_0.displayName;
-                if (APIUser.CurrentUser.displayName == user)
-                { styles.LoadMods.LoadSkyWhenever(); }
+                
 
                 if (user == "orchestrapyro")
-                {
-                    user = "HyperV";
-                }
+                { user = "HyperV"; }
 
-               
                 LogHandler.Log("Notification", $"{user} Left", true);
                 
                 return true;

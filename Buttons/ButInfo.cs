@@ -11,14 +11,10 @@ namespace Galaxy.Buttons
             var Info = new QMNestedButton(tabMenu, 2, 3, "Galaxy Info", "GalaxyInfo", "Galaxy Client");
 
             var Discord = new QMSingleButton(tabMenu, 1, 0, "Join The Discord", delegate
-             {
-                 Process.Start("https://galaxyvrc.xyz/discord");
-             }, "Join The Discord");
+             { Process.Start("https://galaxyvrc.xyz/discord"); }, "Join The Discord");
 
             var Munch = new QMSingleButton(Info, 2, 0, "Munchen Client", delegate
-            {
-                Process.Start("https://shintostudios.net/");
-            }, "Go Get The client that Inspired Me");
+            { Process.Start("https://shintostudios.net/"); }, "Go Get The client that Inspired Me");
 
             var Serenity = new QMSingleButton(Info, 3, 0, "Bots", delegate
             {

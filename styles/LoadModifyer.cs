@@ -30,46 +30,45 @@ namespace Galaxy.styles
                 var source1 = GameObject.Find("UserInterface/LoadingBackground_TealGradient_Music").transform.Find("LoadingSound").GetComponent<AudioSource>();
                 source1.clip = audioclip;
                 source1.Play();
-                GameObject.Find("UserInterface/MenuContent/Popups/LoadingPopup/3DElements/LoadingBackground_TealGradient").SetActive(false);
+              
                 
-                LoadSkyWhenever();
+    
                 //every load screen after
                 while (GameObject.Find("UserInterface/MenuContent/Popups/LoadingPopup") == null) yield return null;
-                var Color = new Color(0f, 0f, 0f);
-                GameObject.Find("UserInterface/MenuContent/Popups/LoadingPopup/3DElements/LoadingInfoPanel").SetActive(false);
-                GameObject.Find("UserInterface/MenuContent/Popups/LoadingPopup/ProgressPanel/Parent_Loading_Progress/Decoration_Right").SetActive(false);
-                GameObject.Find("UserInterface/MenuContent/Popups/LoadingPopup/ProgressPanel/Parent_Loading_Progress/Decoration_Left").SetActive(false);
-                GameObject.Find("UserInterface/MenuContent/Popups/LoadingPopup/ProgressPanel/Parent_Loading_Progress/Panel_Backdrop").SetActive(false);
-                GameObject.Find("UserInterface/MenuContent/Popups/LoadingPopup/ProgressPanel/Parent_Loading_Progress/GoButton").GetComponent<Button>().image.color = Color;
-                GameObject.Find("UserInterface/MenuContent/Popups/LoadingPopup/3DElements/LoadingBackground_TealGradient").SetActive(false);
-                GameObject.Find("UserInterface/MenuContent/Popups/LoadingPopup/ButtonMiddle").GetComponent<Button>().image.color = Color;
-                var source2 = GameObject.Find("UserInterface/MenuContent/Popups/LoadingPopup").transform.Find("LoadingSound").GetComponent<AudioSource>();
+                
+
+                   var source2 = GameObject.Find("UserInterface/MenuContent/Popups/LoadingPopup").transform.Find("LoadingSound").GetComponent<AudioSource>();
                 source2.clip = audioclip;
                 source2.Play();
                 GameObject.Find("UserInterface/MenuContent/Popups/LoadingPopup/3DElements/LoadingBackground_TealGradient").SetActive(false);
                 yield return new WaitForSeconds(0.5f);
-                LoadSkyWhenever();
+                
 
             }
         }
 
-        public static IEnumerator LoadSkyBoxBundle()
-        {
+        public static IEnumerator LoadSkyBoxBundl2e()
+        {var Color = new Color(0f, 0f, 0f);
 
             if (firstload == true)
             { yield return null; }
             while (GameObject.Find("UserInterface/MenuContent/Popups/LoadingPopup") == null) yield return null;
             //UI recolor and Make it look nice for loading
-            
+                            GameObject.Find("UserInterface/MenuContent/Popups/LoadingPopup/3DElements/LoadingInfoPanel").SetActive(false);
+                GameObject.Find("UserInterface/MenuContent/Popups/LoadingPopup/ProgressPanel/Parent_Loading_Progress/Decoration_Right").SetActive(false);
+                GameObject.Find("UserInterface/MenuContent/Popups/LoadingPopup/ProgressPanel/Parent_Loading_Progress/Decoration_Left").SetActive(false);
+                GameObject.Find("UserInterface/MenuContent/Popups/LoadingPopup/ProgressPanel/Parent_Loading_Progress/Panel_Backdrop").SetActive(false);
+                GameObject.Find("UserInterface/MenuContent/Popups/LoadingPopup/ProgressPanel/Parent_Loading_Progress/GoButton").GetComponent<Button>().image.color = Color;
+                GameObject.Find("UserInterface/MenuContent/Popups/LoadingPopup/3DElements/LoadingBackground_TealGradient").SetActive(false);
             // var Color = new Color(0, 0.438850343f, 0.712937f);
            
 
             yield return new WaitForSeconds(.9f);
             
-            LoadSkyWhenever();
+          
         }
 
-        public static void LoadSkyWhenever()
+        public static void LoadSkyWhenever2()
         {
             
             SkyBoxAssetBundle = AssetBundle.LoadFromFile($"{MelonUtils.GameDirectory}\\Galaxy\\Dependencies\\clientassetbundle");

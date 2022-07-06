@@ -16,6 +16,7 @@ namespace Galaxy
             Console.Title = $"Galaxy || v{fileVersion}";
             Galaxy.API.LogHandler.Loader("Success", "Starting Galaxy Client Now");
 #if DEBUG
+            /*
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("========================================================================================================================");
             Console.WriteLine("                                                                                                                        ");
@@ -30,10 +31,9 @@ namespace Galaxy
             Console.WriteLine("                                                                                                                       ");                                
             Console.WriteLine("========================================================================================================================\n");
             Console.ForegroundColor = ConsoleColor.White;
+            */
 #endif
 
         }
-
-
     }
 }

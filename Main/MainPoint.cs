@@ -18,9 +18,7 @@ namespace Galaxy.Main
         public static void OnStar()
         {
             if (Environment.CommandLine.Contains("--BETAMODE"))
-            {
-                Settings.Config.ExtraBeta = "1";
-            }
+            { Settings.Config.ExtraBeta = "1"; }
 
             MelonCoroutines.Start(HudNotify.StartHudNotify());
             LogoShower.DisplayLogo();
@@ -30,7 +28,6 @@ namespace Galaxy.Main
             MelonCoroutines.Start(CheckAuth.CheckAuthMeth());
             tr.Start();
             Patch.Patch.Patchse();
-
         }
 
         public static void NONOMETHOD()
@@ -43,8 +40,7 @@ namespace Galaxy.Main
             { Exploits.QuickChange.QuickChangeAvi3(); }
             if (Input.GetKeyDown(KeyCode.F4) & nconfig.EnableKeybinds)
             { Exploits.QuickChange.QuickChangeAvi4(); }
-            if (Input.GetKeyDown(KeyCode.F6) & nconfig.EnableKeybinds)
-            {styles.LoadMods.LoadSkyWhenever();}
+
             if (Config.ServerNotify == true)
             { HudNotify.Msg("GlobalMessage", 4f); HudNotify.Msg(Config.GlobalMessage, 4f); Config.ServerNotify = false; }
             Exploits.Fly.FlyB();
@@ -54,25 +50,16 @@ namespace Galaxy.Main
             try
             {
                 LogHandler.Log("Starter", "On Late Start Was Called Loading Now");
-
-                load.PresenceUpdater();
-                nconfig.saveconfig($"{MelonUtils.GameDirectory}\\Galaxy\\Config\\GenConfig.json");
-                MelonCoroutines.Start(styles.LoadMods.LoadSkyBoxBundle());
+                nconfig.saveconfig($"{MelonUtils.GameDirectory}\\Galaxy\\Config\\GenConfig.json");   
                 if (nconfig.ShouldPlayLoadMusic == true)
-                {
-                    MelonCoroutines.Start(styles.LoadMods.Starter());
-                }
+                { MelonCoroutines.Start(styles.LoadMods.Starter()); }
             }
             catch (Exception ex)
-            {
-                MelonLogger.Msg(ex);
-            }
+            { MelonLogger.Msg(ex); }
         }
 
         public static void Quitter()
-        {
-            nconfig.saveconfig($"{MelonUtils.GameDirectory}\\Galaxy\\Config\\GenConfig.json");
-        }
+        { nconfig.saveconfig($"{MelonUtils.GameDirectory}\\Galaxy\\Config\\GenConfig.json"); }
 
         public static void LoadConfig()
         {
@@ -84,11 +71,6 @@ namespace Galaxy.Main
             catch
             { nconfig.saveconfig($"{MelonUtils.GameDirectory}\\Galaxy\\Config\\GenConfig.json"); LogHandler.Log("ABD ", "Saved Config"); }
 
-
         }
-
-        
-
-
     }
 }

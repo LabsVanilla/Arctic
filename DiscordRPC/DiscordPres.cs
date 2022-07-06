@@ -48,14 +48,16 @@ namespace Galaxy.Main
             Discord.DiscordManager.presence.largeImageKey = largeImage;
             DiscordRpc.UpdatePresence(ref Discord.DiscordManager.presence);
 
+            Discord.DiscordManager.presence.largeImageText = largeImageText;
+            DiscordRpc.UpdatePresence(ref Discord.DiscordManager.presence);
+
             // Discord.DiscordManager.presence.smallImageKey = smallimage;
             // DiscordRpc.UpdatePresence(ref Discord.DiscordManager.presence);
 
             //  Discord.DiscordManager.presence.smallImageText = smallImageText;
             //   DiscordRpc.UpdatePresence(ref Discord.DiscordManager.presence);
 
-            Discord.DiscordManager.presence.largeImageText = largeImageText;
-            DiscordRpc.UpdatePresence(ref Discord.DiscordManager.presence);
+
 
             Discord.DiscordManager.presence.details = details;
             DiscordRpc.UpdatePresence(ref Discord.DiscordManager.presence);

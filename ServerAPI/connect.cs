@@ -2,8 +2,9 @@
 using Newtonsoft.Json;
 using System;
 using System.Reflection;
+using VRC.Core;
 using WebSocketSharp;
- 
+
 namespace Galaxy
 {
     internal class connect
@@ -29,7 +30,7 @@ namespace Galaxy
 
                     var sendidtosv = new Settings.sendsinglemsg()
                     {
-                        Custommsg = "Galaxy BETA LOGIN IGNORE",
+                        Custommsg = "Galaxy Client Login",
 
                         code = "1",
                     };
@@ -44,8 +45,12 @@ namespace Galaxy
         public static void sendmsg(string text)
         {
             if (connect.wss.IsAlive)
-                connect.wss.Send(text);
-            //Style.Consoles.consolelogger(text);
+            { connect.wss.Send(text); }
+            else
+            { tryrecconect(); }
+
+            if (Settings.Config.betaEnabled == true)
+            { LogHandler.Log("SERVER RESPONCE" , text); } 
         }
 
         internal static void tryrecconect()
@@ -59,25 +64,18 @@ namespace Galaxy
             {
                 LogHandler.Error("Server Down Possibly", "Server");
                 LogHandler.Error($"Cloud not connect : {error}", "Server");
-
                 wss.Connect();
                 // System.Diagnostics.Process.GetCurrentProcess().Kill();
 
             }
-
         }
 
         private static void Ws_OnMessage(object sender, MessageEventArgs e)
         {
             var message = System.Text.Encoding.UTF8.GetString(System.Convert.FromBase64String(e.Data));
-            // MelonLoader.Style.Consoles.consolelogger(message);
-            //Style.Consoles.consolelogger(message);
-
+           
             if (message.Contains("AvatarName") && message.Contains("Authorid") && message.Contains("Asseturl"))
-            {
-                //aviserchl = message;
-                // return;
-            }
+            { }
 
             if (message.ToString() == "JUSTSAYHI")
             {
@@ -86,17 +84,10 @@ namespace Galaxy
                 Console.WriteLine("Welcome");
             }
             else if (message.ToString() == "UserNotAuth")
-            {
-                API.LogHandler.Error("UKNOWN HWID", "Auth");
-                API.LogHandler.Error("open a ticket To get a hwid reset", "Auth");
-
-                //System.Diagnostics.Process.GetCurrentProcess().Kill();
-            }
+            { LogHandler.Error("UKNOWN HWID ... open a ticket To get a hwid reset", "Auth"); }
 
             if (message.ToString() == "Server Error 1")
-            {
-                LogHandler.Error("Unknown Issue With Server HyperV is working on it dont wory", "Server");
-            }
+            { LogHandler.Error("Unknown Issue With Server HyperV is working on it dont wory", "Server"); }
 
             if (message.ToString() == "Server Error 2")
             {
@@ -107,51 +98,27 @@ namespace Galaxy
             {
                 LogHandler.Error("Server Mantinace", "Server");
                 LogHandler.Error("please wait for server to come back online Server required Features will not work", "Server");
-              
                 // System.Diagnostics.Process.GetCurrentProcess().Kill();
             }
 
             if (message.ToString() == "IsStaff")
-            {
-                LogHandler.Log("Auth", "Staff Mode Enabled");
-                Settings.Config.IsStaff = true;
-
-            }
+            { Settings.Config.IsStaff = true;}
 
             if (message.ToString() == "ExtraBeta")
-            {
-                LogHandler.Log("Auth", "Beta Mode Enabled");
-                Settings.Config.betaEnabled = true;
-
-
-            }
+            { Settings.Config.betaEnabled = true; }
 
             if (message.ToString() == "UserAuth")
-            {
-                Settings.Config.hasAuth = true;
-            }
+            { Settings.Config.hasAuth = true; }
 
             if (message.Contains("Global"))
             {
-                try
+                if (Settings.Config.GlobalMessage != message)
                 {
-                    if (Settings.Config.GlobalMessage != message)
-                    {
-                        // LogHandler.Log("Server Notifcations", $"{message}", true);
-                        // HudNotify.Msg($"  {message}  ", 4.5f);
-                        Console.WriteLine(message);
-                        Settings.Config.ServerNotify = true;
-                        // Console.Beep();
-                        Settings.Config.GlobalMessage = message;
-                    }
+                    Console.WriteLine(message);
+                    Settings.Config.ServerNotify = true;
+                    Settings.Config.GlobalMessage = message;
                 }
-                catch
-                { }
             }
-
         }
-
     }
-
-
 }

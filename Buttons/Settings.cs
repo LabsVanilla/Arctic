@@ -33,8 +33,7 @@ namespace Galaxy.Buttons
             }, "click to set avi 1");
 
             var SetCustomAvi2 = new QMSingleButton(settingsmenu, 2, 0, "Set Quick Avi 2", delegate
-            {
-                nconfig.QuickAvi2 = APIUser.CurrentUser.avatarId;
+            {   nconfig.QuickAvi2 = APIUser.CurrentUser.avatarId;
                 nconfig.saveconfig($"{MelonUtils.GameDirectory}\\Galaxy\\Config\\GenConfig.json");
             }, "click to set avi 2");
 
@@ -51,76 +50,50 @@ namespace Galaxy.Buttons
             }, "click to set avi 4");
 
             var SetCustomQuest = new QMSingleButton(settingsmenu, 2, 1, "Set Quest Crasher", delegate
-            {
-
-                try { string AvatarID = "AVATAR ID"; API.inputpopout.run(" Avatar", value => AvatarID = value, () => { nconfig.QuestCrash = AvatarID; nconfig.saveconfig($"{MelonUtils.GameDirectory}\\Galaxy\\Config\\GenConfig.json"); }); } catch (Exception e) { Console.WriteLine(e); }
-            }, "Change Avatar By ID");
+            { try { string AvatarID = "AVATAR ID"; API.inputpopout.run(" Avatar", value => AvatarID = value, () => { nconfig.QuestCrash = AvatarID; nconfig.saveconfig($"{MelonUtils.GameDirectory}\\Galaxy\\Config\\GenConfig.json"); }); } catch (Exception e) { Console.WriteLine(e); } }, "Change Avatar By ID");
 
             var SetCustomPC = new QMSingleButton(settingsmenu, 3, 1, "Set PC Crasher", delegate
-            {
-
-                try { string AvatarID = "AVATAR ID"; API.inputpopout.run(" Avatar", value => AvatarID = value, () => { nconfig.PCCrash = AvatarID; nconfig.saveconfig($"{MelonUtils.GameDirectory}\\Galaxy\\Config\\GenConfig.json"); }); } catch (Exception e) { Console.WriteLine(e); }
-            }, "Set Pc Crasher");
+            { try { string AvatarID = "AVATAR ID"; API.inputpopout.run(" Avatar", value => AvatarID = value, () => { nconfig.PCCrash = AvatarID; nconfig.saveconfig($"{MelonUtils.GameDirectory}\\Galaxy\\Config\\GenConfig.json"); }); } catch (Exception e) { Console.WriteLine(e); } }, "Set Pc Crasher");
 
 
 
             var TogglQuickKybinds = new QMToggleButton(settingsmenu, 4, 1, "KeyBinds", delegate
             {
-
                 nconfig.EnableKeybinds = true;
                 nconfig.saveconfig($"{MelonUtils.GameDirectory}\\Galaxy\\Config\\GenConfig.json");
             }, delegate
             {
                 nconfig.EnableKeybinds = false;
                 nconfig.saveconfig($"{MelonUtils.GameDirectory}\\Galaxy\\Config\\GenConfig.json");
-
-
             }, "Toggle Keybinds");
 
 
             var LoadMusicToggle = new QMToggleButton(settingsmenu, 1, 1, "LoadMusic", delegate
             {
-
                 nconfig.ShouldPlayLoadMusic = true;
                 MelonCoroutines.Start(styles.LoadMods.Starter());
                 nconfig.saveconfig($"{MelonUtils.GameDirectory}\\Galaxy\\Config\\GenConfig.json");
             }, delegate
             {
                 nconfig.ShouldPlayLoadMusic = false;
-
-                nconfig.saveconfig($"{MelonUtils.GameDirectory}\\Galaxy\\Config\\GenConfig.json");
-
-
-            }, "Toggle Load Music");
+                nconfig.saveconfig($"{MelonUtils.GameDirectory}\\Galaxy\\Config\\GenConfig.json"); }, "Toggle Load Music");
 
             var AutoStarSky = new QMToggleButton(settingsmenu, 1, 2, "Star Sky", delegate
             {
                 nconfig.AutoSkybox = true;
                 nconfig.saveconfig($"{MelonUtils.GameDirectory}\\Galaxy\\Config\\GenConfig.json");
-                styles.LoadMods.LoadSkyWhenever();
+             
             }, delegate
             {
                 nconfig.AutoSkybox = false;
                 nconfig.saveconfig($"{MelonUtils.GameDirectory}\\Galaxy\\Config\\GenConfig.json");
             }, "Toggle AutoSkybox");
 
-            styles.LoadMods.LoadSkyWhenever();
-
-
             if (nconfig.ShouldPlayLoadMusic == true)
-            {
-                LoadMusicToggle.ClickMe();
-            }
-
-            if (nconfig.AutoSkybox == true)
-            {
-                AutoStarSky.ClickMe();
-            }
+            { LoadMusicToggle.ClickMe(); }
 
             if (nconfig.EnableKeybinds == true)
-            {
-                TogglQuickKybinds.ClickMe();
-            }
+            { TogglQuickKybinds.ClickMe(); }
 
         }
     }
