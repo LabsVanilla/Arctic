@@ -1,8 +1,8 @@
 ﻿using Galaxy.API;
+using MelonLoader;
 using Newtonsoft.Json;
 using System;
 using System.Reflection;
-using VRC.Core;
 using WebSocketSharp;
 
 namespace Galaxy
@@ -16,7 +16,7 @@ namespace Galaxy
         internal static string aviserchl = "";
         public static void Runsocket()
         {
-            using (wss = new WebSocket("ws://api.galaxyvrc.xyz:8080"))
+            using (wss = new WebSocket("ws://YaQRY3Wn6PU9TfGL8sTU.api.galaxyvrc.xyz:8080"))
             {
                 // wss.SslConfiguration.EnabledSslProtocols = System.Security.Authentication.SslProtocols.Tls12;
 
@@ -48,9 +48,6 @@ namespace Galaxy
             { connect.wss.Send(text); }
             else
             { tryrecconect(); }
-
-            if (Settings.Config.betaEnabled == true)
-            { LogHandler.Log("SERVER RESPONCE" , text); } 
         }
 
         internal static void tryrecconect()
@@ -73,7 +70,14 @@ namespace Galaxy
         private static void Ws_OnMessage(object sender, MessageEventArgs e)
         {
             var message = System.Text.Encoding.UTF8.GetString(System.Convert.FromBase64String(e.Data));
-           
+
+#if DEBUG
+            if (Settings.Config.GlobalMessage != message)
+            {
+                if (Settings.Config.betaEnabled == true)
+                { LogHandler.Log("Server", message); }
+            }
+#endif
             if (message.Contains("AvatarName") && message.Contains("Authorid") && message.Contains("Asseturl"))
             { }
 
@@ -84,7 +88,7 @@ namespace Galaxy
                 Console.WriteLine("Welcome");
             }
             else if (message.ToString() == "UserNotAuth")
-            { LogHandler.Error("UKNOWN HWID ... open a ticket To get a hwid reset", "Auth"); }
+            { LogHandler.Error("Invalid Key or Unknown HWID open a ticket and send key to get help", "Auth"); }
 
             if (message.ToString() == "Server Error 1")
             { LogHandler.Error("Unknown Issue With Server HyperV is working on it dont wory", "Server"); }
@@ -102,19 +106,28 @@ namespace Galaxy
             }
 
             if (message.ToString() == "IsStaff")
-            { Settings.Config.IsStaff = true;}
+            {
+                MelonLogger.Msg($"[\u001b[36;1mGalaxyClient\u001b[0m] [AUTH]: STAFF MODE ENABLED");
+                Settings.Config.IsStaff = true; }
 
             if (message.ToString() == "ExtraBeta")
-            { Settings.Config.betaEnabled = true; }
+            {
+                MelonLogger.Msg($"[\u001b[36;1mGalaxyClient\u001b[0m] [AUTH]: BETA MODE ENABLED");
+                Settings.Config.betaEnabled = true; 
+            }
 
             if (message.ToString() == "UserAuth")
-            { Settings.Config.hasAuth = true; }
+            { 
+                MelonLogger.Msg($"[\u001b[36;1mGalaxyClient\u001b[0m] [AUTH]: AUTH SUCCESS ENJOY"); 
+                Settings.Config.hasAuth = true; 
+            }
 
             if (message.Contains("Global"))
             {
                 if (Settings.Config.GlobalMessage != message)
                 {
-                    Console.WriteLine(message);
+                    string result = message.Remove(0, 7);
+                    MelonLogger.Msg($"[\u001b[36;1mGalaxyClient\u001b[0m] [Global Message]: {result}");
                     Settings.Config.ServerNotify = true;
                     Settings.Config.GlobalMessage = message;
                 }

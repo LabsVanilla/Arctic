@@ -17,11 +17,7 @@ namespace Galaxy.Buttons
             { Process.Start("https://shintostudios.net/"); }, "Go Get The client that Inspired Me");
 
             var Serenity = new QMSingleButton(Info, 3, 0, "Bots", delegate
-            {
-                LogHandler.Log("You Made A Choice", "Serenity");
-                Console.WriteLine("You Made Good Choice");
-                Process.Start("https://discord.gg/vrcbots");
-            }, "SERENITY");
+            { Process.Start("https://discord.gg/vrcbots"); }, "SERENITY");
             
             // This Starts The supporter menu leave at bottom dont touch
             Supporters.Support(Info);

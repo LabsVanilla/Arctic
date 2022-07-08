@@ -18,7 +18,10 @@ namespace Galaxy.Main
         public static void OnStar()
         {
             if (Environment.CommandLine.Contains("--BETAMODE"))
-            { Settings.Config.ExtraBeta = "1"; }
+            {
+                MelonLogger.Warning($"[\u001b[36;1mGalaxyLoader\u001b[0m] [BETA]: BETA MODE ENABLED");
+                Config.ExtraBeta = "1"; 
+            }
 
             MelonCoroutines.Start(HudNotify.StartHudNotify());
             LogoShower.DisplayLogo();
